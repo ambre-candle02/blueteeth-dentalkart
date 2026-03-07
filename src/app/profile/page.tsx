@@ -4,18 +4,11 @@ import { useSession, signOut } from "next-auth/react";
 import { User, Mail, Phone, LogOut, Package, Heart, Settings, Lock, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+
 
 export default function ProfilePage() {
     const { data: session, status } = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (status === "authenticated") {
-            router.replace("/settings");
-        }
-    }, [status, router]);
+    // No redirect - we want users to see their profile dashboard
 
     if (status === "loading") {
         return (
