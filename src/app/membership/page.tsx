@@ -19,7 +19,28 @@ const DEFAULT_PLANS = [
         features: ["Standard Logistics", "Portal Access", "B2B Invoicing", "Monthly Statements"],
         icon: "Building2",
         color: "slate",
+        highlight: false
     },
+    {
+        name: "Professional",
+        price: 4999,
+        period: "/ YEAR",
+        desc: "Advanced toolkit for established practices",
+        features: ["Priority Logistics", "Dedicated Manager", "Custom Pricing", "Advanced Analytics", "Extended Warranty"],
+        icon: "Crown",
+        color: "indigo",
+        highlight: true
+    },
+    {
+        name: "Enterprise",
+        price: 14999,
+        period: "/ YEAR",
+        desc: "Complete supply chain for large clinics",
+        features: ["Same-Day Logistics", "API Integration", "Quarterly Audits", "White-glove Support"],
+        icon: "Sparkles",
+        color: "amber",
+        highlight: false
+    }
 ];
 
 export default function MembershipPage() {
@@ -136,9 +157,9 @@ export default function MembershipPage() {
                                     className="h-full"
                                 >
                                     <div className={cn(
-                                        "h-full w-full min-h-[700px] p-8 md:p-12 rounded-[3rem] transition-all flex flex-col relative",
+                                        "h-full w-full p-8 md:p-10 rounded-3xl transition-all flex flex-col relative",
                                         plan.highlight
-                                            ? "bg-white border-2 border-brand-primary shadow-2xl shadow-brand-primary/10"
+                                            ? "bg-white border-2 border-brand-primary shadow-2xl shadow-brand-primary/10 z-10 md:scale-105"
                                             : plan.color === 'amber'
                                                 ? "bg-gradient-to-br from-amber-50/60 to-white border border-amber-200/60 shadow-sm hover:shadow-xl transition-all"
                                                 : plan.color === 'slate'
