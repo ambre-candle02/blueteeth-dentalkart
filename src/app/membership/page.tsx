@@ -147,7 +147,10 @@ export default function MembershipPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                         {plans.map((plan, i) => {
-                            const Icon = (Icons as any)[plan.icon || "Award"] || Icons.Award;
+                            const Icon = (Icons as any)[plan.icon || (i === 0 ? "Building2" : i === 1 ? "Crown" : "Sparkles")] || Icons.Award;
+                            const isHighlight = plan.highlight !== undefined ? plan.highlight : (plans.length === 3 && i === 1);
+                            const planColor = plan.color || (i === 0 ? 'slate' : i === 1 ? 'indigo' : 'amber');
+
                             return (
                                 <motion.div
                                     key={plan.name}
@@ -158,27 +161,26 @@ export default function MembershipPage() {
                                 >
                                     <div className={cn(
                                         "h-full w-full p-8 md:p-10 rounded-3xl transition-all flex flex-col relative",
-                                        plan.highlight
+                                        isHighlight
                                             ? "bg-white border-2 border-brand-primary shadow-2xl shadow-brand-primary/10 z-10 md:scale-105"
-                                            : plan.color === 'amber'
+                                            : planColor === 'amber'
                                                 ? "bg-gradient-to-br from-amber-50/60 to-white border border-amber-200/60 shadow-sm hover:shadow-xl transition-all"
-                                                : plan.color === 'slate'
+                                                : planColor === 'slate'
                                                     ? "bg-gradient-to-br from-slate-50/60 to-white border border-slate-200/60 shadow-sm hover:shadow-xl transition-all"
                                                     : "bg-gradient-to-br from-blue-50/60 to-white border border-blue-200/60 shadow-sm hover:shadow-xl transition-all"
                                     )}>
-                                        {plan.highlight && (
+                                        {isHighlight && (
                                             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white px-4 py-1.5 rounded-full shadow-lg flex items-center gap-2 z-20">
                                                 <Star size={12} className="fill-white" />
                                                 <span className="text-[9px] font-bold uppercase tracking-widest">Recommended Choice</span>
                                             </div>
                                         )}
 
-                                        {/* Plan Header */}
                                         <div className="mb-6">
                                             <div className={cn(
                                                 "w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110",
-                                                plan.color === 'slate' ? 'bg-slate-100 text-slate-600' :
-                                                    plan.color === 'amber' ? 'bg-amber-100 text-amber-600' :
+                                                planColor === 'slate' ? 'bg-slate-100 text-slate-600' :
+                                                    planColor === 'amber' ? 'bg-amber-100 text-amber-600' :
                                                         'bg-indigo-100 text-indigo-600'
                                             )}>
                                                 <Icon size={22} />
@@ -211,12 +213,12 @@ export default function MembershipPage() {
                                         <button
                                             onClick={() => plan.price === 0 ? toast.info("Success: Your clinical environment is already synchronized with this tier protocol.") : handleUpgrade(plan)}
                                             className={cn(
-                                                "w-full py-4 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95",
-                                                plan.highlight
+                                                "w-full py-4 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95",
+                                                isHighlight
                                                     ? "bg-brand-primary text-white hover:bg-brand-dark shadow-lg shadow-brand-primary/20"
                                                     : plan.price === 0
                                                         ? "bg-emerald-50 text-emerald-600 border border-emerald-100 hover:bg-emerald-100 active:bg-emerald-200"
-                                                        : "bg-brand-primary/5 text-brand-primary border border-brand-primary/10 hover:bg-brand-primary/10"
+                                                        : "bg-brand-primary/10 text-brand-primary border border-brand-primary/20 hover:bg-brand-primary/20"
                                             )}
                                         >
                                             {plan.price === 0 ? "Active Deployment" : "Authorize Tier"} <ArrowRight size={12} />
