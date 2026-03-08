@@ -5,7 +5,7 @@ export default async function AdminProductsPage() {
     const { products = [] } = await getProducts();
 
     return (
-        <div className="p-8 max-w-[1700px] mx-auto text-black min-h-screen">
+        <div className="p-4 sm:p-8 max-w-[1700px] mx-auto text-black min-h-screen">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
                 <div>
                     <h1 className="text-4xl font-black text-slate-900 tracking-tighter">Inventory Control</h1>

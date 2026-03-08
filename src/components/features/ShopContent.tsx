@@ -87,12 +87,13 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
     };
 
     return (
-        <div className="bg-[#f8faff] min-h-screen py-12 text-slate-900 relative">
+        <div className="bg-[#f8faff] min-h-screen py-8 md:py-12 text-slate-900 relative overflow-x-hidden">
             {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/[0.03] rounded-full blur-[150px] -mr-64 -mt-64" />
 
-            <div className="max-w-[1600px] w-full mx-auto px-8 sm:px-12 relative z-10">
-                <div className="flex items-center gap-4 mb-10">
+            <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-12 relative z-10">
+                {/* Compact Header Breadcrumb - Merged on Mobile */}
+                <div className="hidden md:flex items-center gap-4 mb-8">
                     <BackButton />
                     <div className="h-4 w-px bg-slate-200" />
                     <div className="flex items-center gap-2">
@@ -101,7 +102,7 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
                     </div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row gap-12 items-start">
+                <div className="flex flex-col lg:flex-row gap-8 md:gap-12 lg:items-start">
                     {/* Filter Sidebar */}
                     <aside className="hidden lg:block w-[360px] flex-shrink-0 sticky top-32 h-fit">
                         <ShopFilters
@@ -121,29 +122,34 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-6"
+                            className="bg-white p-5 md:p-8 rounded-3xl md:rounded-[2.5rem] border border-slate-100 shadow-lg shadow-slate-200/40 flex flex-col md:flex-row justify-between items-center gap-5 md:gap-6"
                         >
-                            <div className="flex items-center gap-5">
-                                <div className="p-4 bg-brand-primary rounded-[1.5rem] text-white shadow-lg shadow-brand-primary/30">
-                                    <ListFilter size={24} />
+                            <div className="flex items-center gap-4 md:gap-5 w-full md:w-auto">
+                                {/* Integrated Back Button for Mobile */}
+                                <div className="md:hidden">
+                                    <BackButton className="w-10 h-10 rounded-xl" />
                                 </div>
-                                <div>
-                                    <div className="flex items-center gap-3">
-                                        <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+
+                                <div className="p-3 md:p-4 bg-brand-primary rounded-2xl md:rounded-[1.5rem] text-white shadow-lg shadow-brand-primary/30 shrink-0">
+                                    <ListFilter className="w-5 h-5 md:w-6 md:h-6" />
+                                </div>
+                                <div className="flex-1">
+                                    <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                                        <h1 className="text-base md:text-2xl font-black text-slate-900 tracking-tight leading-tight">
                                             {query ? `Search: "${query}"` : "Dental Portfolio"}
                                         </h1>
-                                        <div className="bg-brand-primary/10 text-brand-primary text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest border border-brand-primary/10">
+                                        <div className="bg-brand-primary/10 text-brand-primary text-[8px] md:text-[10px] font-black px-2 md:px-2.5 py-1 rounded-full uppercase tracking-widest border border-brand-primary/10 w-fit shrink-0">
                                             {filteredProducts.length} Items
                                         </div>
                                     </div>
-                                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Found in active repository</p>
+                                    <p className="text-[8px] md:text-xs text-slate-400 font-bold uppercase tracking-widest mt-0.5 md:mt-1">Found in active repository</p>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-4 w-full md:w-auto">
+                            <div className="flex items-center gap-4 w-full md:w-auto mt-4 md:mt-0">
                                 <div className="relative flex-1 md:w-64">
                                     <select
-                                        className="w-full appearance-none bg-brand-primary/5 border border-brand-primary/10 px-6 py-4 pr-12 rounded-2xl text-sm font-black uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-brand-primary/10 transition-all cursor-pointer text-brand-primary"
+                                        className="w-full appearance-none bg-brand-primary/5 border border-brand-primary/10 text-center sm:text-left px-5 md:px-6 py-3 md:py-4 pr-8 sm:pr-10 md:pr-12 rounded-xl md:rounded-2xl text-[12px] md:text-sm font-black uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-brand-primary/10 transition-all cursor-pointer text-brand-primary"
                                         value={sortBy}
                                         onChange={(e) => setSortBy(e.target.value)}
                                     >
@@ -152,13 +158,13 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
                                         <option value="price-high">Highest Premium</option>
                                         <option value="rating">Top Performance</option>
                                     </select>
-                                    <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-brand-primary w-4 h-4" />
+                                    <ChevronDown className="absolute right-4 md:right-5 top-1/2 -translate-y-1/2 text-brand-primary w-4 h-4 pointer-events-none" />
                                 </div>
                                 <button
-                                    className="lg:hidden p-4 bg-white border border-slate-200 rounded-2xl shadow-sm"
+                                    className="lg:hidden p-3 md:p-4 bg-white border border-slate-200 rounded-xl md:rounded-2xl shadow-sm hover:bg-slate-50 transition-colors"
                                     onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
                                 >
-                                    <Filter size={20} className="text-brand-primary" />
+                                    <Filter size={18} className="text-brand-primary" />
                                 </button>
                             </div>
                         </motion.div>
@@ -170,7 +176,7 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
                                     initial={{ height: 0, opacity: 0 }}
                                     animate={{ height: "auto", opacity: 1 }}
                                     exit={{ height: 0, opacity: 0 }}
-                                    className="lg:hidden overflow-hidden"
+                                    className="lg:hidden overflow-hidden w-full"
                                 >
                                     <ShopFilters
                                         price={price}
@@ -187,7 +193,7 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
 
                         {/* Grid */}
                         {filteredProducts.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                                 {filteredProducts.map((product, idx) => (
                                     <motion.div
                                         key={product.id}
@@ -200,15 +206,17 @@ export default function ShopContent({ dbProducts = [] }: { dbProducts?: any[] })
                                 ))}
                             </div>
                         ) : (
-                            <div className="bg-white rounded-[3rem] p-32 text-center border-2 border-dashed border-brand-primary/20 space-y-6">
-                                <div className="w-24 h-24 bg-brand-primary/5 rounded-full flex items-center justify-center mx-auto text-brand-primary/40">
-                                    <PackageX size={48} />
+                            <div className="bg-white rounded-3xl md:rounded-[3rem] p-8 md:p-32 text-center border-2 border-dashed border-brand-primary/20 space-y-4 md:space-y-6">
+                                <div className="w-16 h-16 md:w-24 md:h-24 bg-brand-primary/5 rounded-full flex items-center justify-center mx-auto text-brand-primary/40">
+                                    <PackageX className="w-8 h-8 md:w-12 md:h-12" />
                                 </div>
-                                <div className="space-y-2">
-                                    <h3 className="text-2xl font-black text-brand-dark tracking-tight">Inventory Mismatch</h3>
-                                    <p className="text-slate-500 font-medium max-w-sm mx-auto">No components match your matrix settings. Try recalibrating your filters or search query.</p>
+                                <div className="space-y-1 md:space-y-2">
+                                    <h3 className="text-xl md:text-2xl font-black text-brand-dark tracking-tight">Inventory Mismatch</h3>
+                                    <p className="text-[12px] md:text-base text-slate-500 font-medium max-w-[250px] md:max-w-sm mx-auto leading-relaxed">
+                                        No components match your settings. Try recalibrating your filters or search query.
+                                    </p>
                                 </div>
-                                <button onClick={clearFilters} className="bg-brand-primary text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-brand-dark shadow-lg shadow-brand-primary/20 transition-all">Reset Matrix</button>
+                                <button onClick={clearFilters} className="bg-brand-primary text-white px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-black text-[10px] md:text-sm uppercase tracking-widest hover:bg-brand-dark shadow-lg shadow-brand-primary/20 transition-all">Reset Matrix</button>
                             </div>
                         )}
                     </div>

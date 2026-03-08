@@ -118,38 +118,38 @@ export default function EventsPage() {
             <Toaster position="bottom-right" richColors />
             {/* Background Decor - Refined without blurs */}
             <div className="fixed inset-0 pointer-events-none opacity-[0.03] overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(#0056D2_1px,transparent_1px)] [background-size:40px_40px]" />
+                <div className="absolute inset-0 bg-[radial-gradient(#0056D2_1px,transparent_1px)] [background-size:20px_20px] md:[background-size:40px_40px]" />
             </div>
 
-            <div className="max-w-[1600px] w-full mx-auto px-6 sm:px-10 lg:px-14 relative z-10">
+            <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-10 lg:px-14 relative z-10">
 
                 {/* Integrated Header "Patti" */}
-                <header className="mb-10">
-                    <div className="bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="flex items-center gap-6 w-full md:w-auto">
-                            <BackButton />
+                <header className="pt-4 md:pt-0 mb-6 md:mb-10">
+                    <div className="bg-white rounded-2xl md:rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden p-4 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+                        <div className="flex items-center gap-3 md:gap-6 w-full md:w-auto">
+                            <BackButton className="w-8 h-8 md:w-12 md:h-12" />
                             <div className="h-10 w-px bg-slate-200 hidden md:block" />
-                            <div>
-                                <h1 className="text-2xl font-black text-slate-900 tracking-tight">Clinical Academy</h1>
-                                <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-1 opacity-70">Empowering Modern Dentistry</p>
+                            <div className="min-w-0 flex-1">
+                                <h1 className="text-lg md:text-2xl font-black text-slate-900 tracking-tight leading-none">Clinical Academy</h1>
+                                <p className="text-[10px] md:text-xs font-semibold text-slate-500 uppercase tracking-widest mt-1 opacity-70 truncate">Empowering Modern Dentistry</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 w-full md:w-auto">
-                            <div className="flex -space-x-2.5 items-center mr-2">
+                        <div className="flex items-center justify-between md:justify-end gap-3 w-full md:w-auto mt-1 md:mt-0">
+                            <div className="flex -space-x-2 items-center">
                                 {[11, 22, 33].map(i => (
                                     <img
                                         key={i}
                                         src={`https://i.pravatar.cc/100?u=${i}`}
                                         alt="Attendee"
-                                        className="w-8 h-8 rounded-full border-2 border-white shadow-sm grayscale-[0.3] hover:grayscale-0 transition-all cursor-pointer"
+                                        className="w-7 h-7 md:w-8 md:h-8 rounded-full border-2 border-white shadow-sm grayscale-[0.3] hover:grayscale-0 transition-all cursor-pointer"
                                     />
                                 ))}
-                                <div className="px-3 bg-white border border-slate-100 rounded-full h-8 flex items-center shadow-sm -ml-2 relative z-10">
-                                    <span className="text-[9px] font-black text-slate-900 uppercase tracking-tight">12k+ Attending</span>
+                                <div className="px-2 md:px-3 bg-white border border-slate-100 rounded-full h-7 md:h-8 flex items-center shadow-sm -ml-2 relative z-10">
+                                    <span className="text-[8px] md:text-[9px] font-black text-slate-900 uppercase tracking-tight">12k+ Attending</span>
                                 </div>
                             </div>
-                            <Link href="/events/past" className="bg-brand-primary text-white px-6 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-dark transition-all shadow-xl shadow-brand-primary/20">
+                            <Link href="/events/past" className="bg-brand-primary text-white px-4 md:px-6 py-2.5 md:py-3.5 rounded-lg md:rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/20">
                                 Past Events
                             </Link>
                         </div>
@@ -157,16 +157,16 @@ export default function EventsPage() {
                 </header>
 
                 {/* Filter & Search Belt */}
-                <div className="flex flex-col xl:flex-row items-center justify-between gap-6 mb-12 bg-white/50 backdrop-blur-md p-4 rounded-[1.5rem] border border-white/50 shadow-sm">
+                <div className="flex flex-col xl:flex-row items-center justify-between gap-4 md:gap-6 mb-8 md:mb-12 bg-white/50 backdrop-blur-md p-3 md:p-4 rounded-2xl md:rounded-[1.5rem] border border-white/50 shadow-sm">
                     <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full xl:w-auto no-scrollbar">
                         {CATEGORIES.map(cat => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveTab(cat)}
                                 className={cn(
-                                    "px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all",
+                                    "px-4 md:px-6 py-2.5 md:py-3 rounded-lg md:rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap",
                                     activeTab === cat
-                                        ? "bg-brand-primary text-white shadow-xl shadow-brand-primary/20"
+                                        ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20"
                                         : "text-slate-500 hover:bg-slate-100"
                                 )}
                             >
@@ -176,13 +176,13 @@ export default function EventsPage() {
                     </div>
 
                     <div className="relative w-full xl:w-96 group">
-                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary" />
+                        <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary" />
                         <input
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Find Clinical Mastery..."
-                            className="w-full pl-11 pr-6 py-3.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-4 focus:ring-brand-primary/5 transition-all shadow-sm"
+                            className="w-full pl-10 pr-4 md:pr-6 py-2.5 md:py-3.5 bg-white border border-slate-200 rounded-lg md:rounded-xl text-xs md:text-sm font-medium focus:outline-none focus:ring-4 focus:ring-brand-primary/5 transition-all shadow-sm"
                         />
                     </div>
                 </div>
@@ -207,8 +207,8 @@ export default function EventsPage() {
                                         {/* Visual Section - Restored Prominent Color Height */}
                                         <div className={cn("h-64 relative overflow-hidden bg-gradient-to-br flex items-center justify-center p-8", event.gradient)}>
                                             <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]" />
-                                            <div className="relative z-10 w-20 h-20 bg-white/20 backdrop-blur-md rounded-[1.85rem] border border-white/30 flex items-center justify-center shadow-2xl transition-transform duration-700 group-hover:scale-110">
-                                                <Icon size={40} className="text-white" strokeWidth={1.5} />
+                                            <div className="relative z-10 w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md rounded-2xl md:rounded-[1.85rem] border border-white/30 flex items-center justify-center shadow-2xl transition-transform duration-700 group-hover:scale-110">
+                                                <Icon size={32} className="text-white" strokeWidth={1.5} />
                                             </div>
 
                                             {/* Labels */}
@@ -244,23 +244,23 @@ export default function EventsPage() {
                                                 {event.desc}
                                             </p>
 
-                                            <div className="mt-auto space-y-4 pt-6 border-t border-slate-50 relative">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-9 h-9 rounded-xl bg-brand-primary/5 border border-brand-primary/10 flex items-center justify-center text-brand-primary transition-colors">
-                                                        <Calendar size={17} />
+                                            <div className="mt-auto space-y-3 md:space-y-4 pt-4 md:pt-6 border-t border-slate-50 relative">
+                                                <div className="flex items-center gap-3 md:gap-4">
+                                                    <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-brand-primary/5 border border-brand-primary/10 flex items-center justify-center text-brand-primary transition-colors">
+                                                        <Calendar size={15} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Protocol Date</p>
-                                                        <p className="text-sm font-bold text-slate-800">{event.date}</p>
+                                                        <p className="text-[8px] md:text-[9px] font-black text-slate-400 uppercase tracking-widest">Protocol Date</p>
+                                                        <p className="text-[12px] md:text-sm font-bold text-slate-800">{event.date}</p>
                                                     </div>
                                                 </div>
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-9 h-9 rounded-xl bg-brand-primary/5 border border-brand-primary/10 flex items-center justify-center text-brand-primary transition-colors">
-                                                        <MapPin size={17} />
+                                                <div className="flex items-center gap-3 md:gap-4">
+                                                    <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-brand-primary/5 border border-brand-primary/10 flex items-center justify-center text-brand-primary transition-colors">
+                                                        <MapPin size={15} />
                                                     </div>
                                                     <div>
-                                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Deployment Hub</p>
-                                                        <p className="text-sm font-bold text-slate-800 line-clamp-1">{event.location}</p>
+                                                        <p className="text-[8px] md:text-[9px] font-black text-slate-400 uppercase tracking-widest">Deployment Hub</p>
+                                                        <p className="text-[12px] md:text-sm font-bold text-slate-800 line-clamp-1">{event.location}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -283,47 +283,47 @@ export default function EventsPage() {
                 </div>
 
                 {/* Authority Certification Section - Modernized Blue Theme */}
-                <div className="p-10 md:p-16 bg-gradient-to-br from-blue-600 to-blue-900 rounded-[3rem] text-white shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden group mb-16 border border-white/10">
-                    <div className="absolute inset-0 opacity-[0.1] pointer-events-none bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:32px_32px]" />
-                    <div className="absolute -top-20 -left-20 w-96 h-96 bg-white/10 rounded-full blur-[120px]" />
-                    <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-brand-accent/20 rounded-full blur-[120px]" />
+                <div className="p-6 md:p-16 bg-gradient-to-br from-blue-600 to-blue-900 rounded-[2.25rem] md:rounded-[3rem] text-white shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12 relative overflow-hidden group mb-16 border border-white/10">
+                    <div className="absolute inset-0 opacity-[0.1] pointer-events-none bg-[radial-gradient(#fff_2px,transparent_2px)] [background-size:24px_24px] md:[background-size:32px_32px]" />
+                    <div className="absolute -top-20 -left-20 w-64 md:w-96 h-64 md:h-96 bg-white/10 rounded-full blur-[100px] md:blur-[120px]" />
+                    <div className="absolute -bottom-20 -right-20 w-64 md:w-96 h-64 md:h-96 bg-brand-accent/20 rounded-full blur-[100px] md:blur-[120px]" />
 
                     <div className="max-w-2xl relative z-10 text-center md:text-left">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-white rounded-xl text-[10px] font-black uppercase tracking-widest mb-6 border border-white/20 backdrop-blur-md">
+                        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-white/10 text-white rounded-lg md:rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest mb-4 md:mb-6 border border-white/20 backdrop-blur-md font-sans">
                             <ShieldCheck size={14} strokeWidth={2.5} /> Professional Certification Authority
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight leading-[1.05]">Elite Standards in Dental Education.</h2>
-                        <p className="text-blue-100 text-base md:text-lg font-medium leading-relaxed mb-10 opacity-90">
+                        <h2 className="text-2xl md:text-5xl font-black text-white mb-4 md:mb-6 tracking-tight leading-[1.1] md:leading-[1.05]">Elite Standards in Dental Education.</h2>
+                        <p className="text-blue-100 text-sm md:text-lg font-medium leading-relaxed mb-8 md:mb-10 opacity-90 font-sans">
                             Every attendee is awarded a digitally verified credential, certified by world-leading clinical boards. Elevate your practice with recognized excellence.
                         </p>
 
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
                             {[
                                 { val: "125k+", label: "Verified Docs" },
                                 { val: "180+", label: "Masterclasses" },
                                 { val: "4.9/5", label: "User Trust" }
                             ].map((stat, i) => (
-                                <div key={i} className="bg-white/5 p-4 rounded-2xl border border-white/10">
-                                    <p className="text-3xl font-black text-white tracking-tighter">{stat.val}</p>
-                                    <p className="text-[10px] font-black text-blue-200 uppercase tracking-widest mt-1 opacity-80">{stat.label}</p>
+                                <div key={i} className="bg-white/5 p-3 md:p-4 rounded-xl md:rounded-2xl border border-white/10">
+                                    <p className="text-xl md:text-3xl font-black text-white tracking-tighter">{stat.val}</p>
+                                    <p className="text-[8px] md:text-[10px] font-black text-blue-200 uppercase tracking-widest mt-1 opacity-80">{stat.label}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
 
                     <div className="relative z-10 lg:w-1/3 w-full">
-                        <div className="p-10 rounded-[2.5rem] bg-white text-slate-900 flex flex-col items-center text-center gap-8 shadow-2xl relative overflow-hidden group">
+                        <div className="p-8 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] bg-white text-slate-900 flex flex-col items-center text-center gap-6 md:gap-8 shadow-2xl relative overflow-hidden group">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16" />
-                            <div className="w-20 h-20 bg-brand-primary/10 rounded-3xl flex items-center justify-center text-brand-primary transition-transform duration-700">
-                                <Award size={48} strokeWidth={1.5} />
+                            <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-primary/10 rounded-2xl md:rounded-3xl flex items-center justify-center text-brand-primary transition-transform duration-700">
+                                <Award size={40} strokeWidth={1.5} />
                             </div>
                             <div>
-                                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary mb-2">Blockchain Secured</p>
-                                <h3 className="text-2xl font-black tracking-tight text-slate-900">Verified Protocol</h3>
-                                <p className="text-slate-500 text-sm font-medium mt-2 leading-relaxed px-4">Instant, immutable digital badges provided globally.</p>
+                                <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary mb-2">Blockchain Secured</p>
+                                <h3 className="text-xl md:text-2xl font-black tracking-tight text-slate-900">Verified Protocol</h3>
+                                <p className="text-slate-500 text-[11px] md:text-sm font-medium mt-2 leading-relaxed px-4 font-sans">Instant, immutable digital badges provided globally.</p>
                             </div>
-                            <button className="w-full py-4 bg-brand-primary text-white rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] hover:bg-brand-dark transition-all shadow-xl shadow-brand-primary/30 flex items-center justify-center gap-3 active:scale-95">
-                                Credential Lookup <ArrowRight size={16} />
+                            <button className="w-full py-3.5 md:py-4 bg-brand-primary text-white rounded-xl md:rounded-2xl font-black text-[10px] md:text-[11px] uppercase tracking-widest md:tracking-[0.2em] hover:bg-brand-dark transition-all shadow-xl shadow-brand-primary/30 flex items-center justify-center gap-2 md:gap-3 active:scale-95">
+                                Credential Lookup <ArrowRight size={14} />
                             </button>
                         </div>
                     </div>

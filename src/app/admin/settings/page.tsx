@@ -5,7 +5,7 @@ export default async function AdminSettingsPage() {
     const config = await getGlobalConfig();
 
     return (
-        <div className="p-6 max-w-[1200px] mx-auto text-black mb-32">
+        <div className="p-4 sm:p-6 max-w-[1200px] mx-auto text-black mb-32">
             <div className="mb-8">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light text-brand-primary text-[10px] font-black uppercase tracking-widest mb-4 border border-brand-primary/10">
                     <span className="relative flex h-1.5 w-1.5">

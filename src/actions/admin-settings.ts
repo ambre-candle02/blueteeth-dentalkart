@@ -13,7 +13,7 @@ export interface GlobalConfig {
 
 const DEFAULT_CONFIG: GlobalConfig = {
     maintenanceMode: false,
-    shopAnnouncement: "Welcome to Blueteeth Dental Kart!",
+    shopAnnouncement: "Welcome to Blueteeth Dental Store!",
     maxCartItems: 10,
     showStockLevel: true,
     lastUpdated: Date.now()

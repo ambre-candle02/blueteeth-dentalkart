@@ -82,12 +82,12 @@ export default function CheckoutPage() {
                     key: rzpResult.key,
                     amount: rzpResult.amount,
                     currency: "INR",
-                    name: "Blueteeth Dentalkart",
+                    name: "Blueteeth Dental Store",
                     description: "Medical Supplies Payment",
                     order_id: rzpResult.razorpayOrderId,
                     handler: async function (response: any) {
                         setIsProcessing(true);
-                        const verifyResult = await verifyAndPlaceOrder(rzpResult.dbOrderId, response, orderPayload);
+                        const verifyResult = await verifyAndPlaceOrder(rzpResult.dbOrderId as string, response, orderPayload);
 
                         if (verifyResult.success) {
                             setIsSuccess(true);
@@ -125,8 +125,34 @@ export default function CheckoutPage() {
     };
 
     const handleGetLocation = () => {
-        if (!navigator.geolocation) return alert("Geolocation not supported by your browser.");
         setIsLocating(true);
+
+        const fallbackLocation = async () => {
+            try {
+                // IP-based location fallback (works without permission and on insecure origins)
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                if (data.city) {
+                    setCustomerData(prev => ({
+                        ...prev,
+                        address: data.org || data.asn || "",
+                        city: data.city || ""
+                    }));
+                } else {
+                    throw new Error("IP location failed");
+                }
+            } catch (error) {
+                alert("Location access is restricted. Please enter your address manually.");
+            } finally {
+                setIsLocating(false);
+            }
+        };
+
+        if (!navigator.geolocation) {
+            fallbackLocation();
+            return;
+        }
+
         navigator.geolocation.getCurrentPosition(
             async (pos) => {
                 try {
@@ -143,16 +169,16 @@ export default function CheckoutPage() {
                         city
                     }));
                 } catch {
-                    alert("Could not fetch address. Please enter manually.");
+                    fallbackLocation();
                 } finally {
                     setIsLocating(false);
                 }
             },
             (err) => {
-                if (err.code === 1) alert("Location permission denied. Please allow access in browser settings.");
-                else alert("Unable to get location. Please enter manually.");
-                setIsLocating(false);
-            }
+                // If permission denied or other error, try fallback
+                fallbackLocation();
+            },
+            { timeout: 5000 }
         );
     };
 
@@ -197,26 +223,26 @@ export default function CheckoutPage() {
             <div className="fixed top-0 right-0 w-[500px] h-[500px] bg-brand-primary/[0.03] rounded-full blur-[100px] -mr-64 -mt-64 pointer-events-none" />
             <div className="fixed bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500/[0.03] rounded-full blur-[100px] -ml-48 -mb-48 pointer-events-none" />
 
-            <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-10 pt-10 relative z-10">
-                <BackButton />
+            <div className="max-w-[1100px] mx-auto px-4 md:px-10 py-6 md:py-10 relative z-10">
 
                 {/* Header Card */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="relative w-full rounded-3xl overflow-hidden mt-4 mb-8 bg-brand-primary/[0.04] border border-brand-primary/10 shadow-sm"
+                    className="relative w-full rounded-3xl overflow-hidden mb-6 md:mb-8 bg-brand-primary/[0.04] border border-brand-primary/10 shadow-sm"
                 >
-                    <div className="flex items-center justify-between px-8 py-5 gap-4">
-                        <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-2xl bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20 shrink-0">
+                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between px-6 md:px-8 py-5 gap-4">
+                        <div className="flex items-center gap-4 w-full md:w-auto">
+                            <BackButton className="w-10 h-10 shrink-0" />
+                            <div className="w-10 h-10 rounded-2xl bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/20 shrink-0 hidden sm:flex">
                                 <ShieldCheck size={18} className="text-white" />
                             </div>
                             <div>
-                                <h1 className="text-xl font-bold text-brand-dark tracking-tight">Secure Checkout</h1>
-                                <p className="text-xs text-slate-500 mt-0.5">Complete your order securely</p>
+                                <h1 className="text-lg md:text-xl font-bold text-brand-dark tracking-tight">Secure Checkout</h1>
+                                <p className="text-[10px] md:text-xs text-slate-500 mt-0.5">Complete your order securely</p>
                             </div>
                         </div>
-                        <div className="hidden sm:flex items-center gap-2 text-sm text-emerald-600 font-semibold">
+                        <div className="hidden sm:flex items-center gap-2 text-sm text-emerald-600 font-semibold w-full md:w-auto mt-2 md:mt-0">
                             <Truck size={15} /> Free Delivery on all orders
                         </div>
                     </div>

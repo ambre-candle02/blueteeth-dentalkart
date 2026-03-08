@@ -96,11 +96,11 @@ export function GalleryClient({ initialItems }: { initialItems: any[] }) {
     };
 
     return (
-        <div className="max-w-7xl mx-auto space-y-10 animate-in fade-in duration-700">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-8 sm:space-y-10 animate-in fade-in duration-700">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight uppercase tracking-widest text-sm">Media Vault</h1>
-                    <p className="text-[11px] text-slate-500 mt-1 font-bold uppercase tracking-widest opacity-60 italic">Store, manage and generate links for images & videos.</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase tracking-widest text-sm">Media Vault</h1>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1 font-bold uppercase tracking-widest opacity-60 italic">Store, manage and generate links for images &amp; videos.</p>
                 </div>
 
                 <div>
@@ -114,15 +114,15 @@ export function GalleryClient({ initialItems }: { initialItems: any[] }) {
                     <button
                         onClick={() => fileInputRef.current?.click()}
                         disabled={isUploading}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl flex items-center gap-3 font-black text-[12px] uppercase tracking-[0.1em] shadow-lg shadow-blue-600/20 transition-all active:scale-95 disabled:opacity-50"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl flex items-center gap-2 sm:gap-3 font-black text-[10px] sm:text-[12px] uppercase tracking-[0.1em] shadow-lg shadow-blue-600/20 transition-all active:scale-95 disabled:opacity-50"
                     >
-                        {isUploading ? <Loader2 className="animate-spin" size={18} /> : <UploadCloud size={18} />}
-                        {isUploading ? 'Uploading Data...' : 'Upload New Media'}
+                        {isUploading ? <Loader2 className="animate-spin" size={16} /> : <UploadCloud size={16} />}
+                        {isUploading ? 'Uploading...' : 'Upload Media'}
                     </button>
                 </div>
             </div>
 
-            <div className="bg-white/30 backdrop-blur-xl rounded-3xl border border-blue-200/40 shadow-xl overflow-hidden p-8 min-h-[500px]">
+            <div className="bg-white/30 backdrop-blur-xl rounded-3xl border border-blue-200/40 shadow-xl overflow-hidden p-4 sm:p-8 min-h-[500px]">
                 {items.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-[400px]">
                         <div className="w-24 h-24 bg-blue-50/50 rounded-[2rem] flex items-center justify-center text-blue-600 mb-6 border border-blue-100 shadow-inner">

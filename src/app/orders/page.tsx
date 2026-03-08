@@ -114,29 +114,31 @@ function OrdersPageContent() {
 
             <div className="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-14 pt-8">
                 {/* Integrated Header "Patti" */}
-                <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden mb-10">
-                    <div className="relative p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
-                        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-primary/[0.02] to-transparent pointer-events-none" />
+                <div className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden mb-8 md:mb-10">
+                    <div className="relative p-5 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/[0.03] to-transparent pointer-events-none" />
 
-                        <div className="flex items-center gap-6 relative z-10 w-full md:w-auto">
-                            <BackButton />
-                            <div>
-                                <div className="flex items-center gap-3 mb-1">
-                                    <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Order Activity</h1>
-                                    <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">{realOrders.length} Protocols</span>
+                        <div className="flex items-center gap-4 md:gap-6 relative z-10 w-full md:w-auto">
+                            <BackButton className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl shrink-0" />
+                            <div className="min-w-0">
+                                <div className="flex flex-col-reverse md:flex-row md:items-center gap-1 md:gap-3 mb-1 md:mb-0">
+                                    <h1 className="text-xl md:text-4xl font-black text-slate-900 tracking-tighter truncate">Order <span className="text-brand-primary">Activity</span></h1>
+                                    <span className="w-fit bg-brand-primary/5 text-brand-primary text-[8px] md:text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-brand-primary/10">
+                                        {realOrders.length} Protocols
+                                    </span>
                                 </div>
-                                <p className="text-sm text-slate-400 font-medium">Tracking clinical supplies and equipment procurement.</p>
+                                <p className="text-[10px] md:text-sm text-slate-400 font-medium leading-tight">Tracking clinical supplies and equipment procurement.</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 relative z-10 w-full md:w-auto">
-                            <div className="px-4 py-2 bg-white border border-slate-200 rounded-xl shadow-sm text-[11px] font-bold text-slate-500 flex items-center gap-2">
+                        <div className="flex flex-row items-center gap-2 md:gap-4 relative z-10 w-full md:w-auto mt-2 md:mt-0">
+                            <div className="hidden sm:flex px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-bold text-slate-500 items-center gap-2">
                                 <Calendar size={14} className="text-brand-primary" />
                                 {todayDate}
                             </div>
                             <button
                                 onClick={() => handleAction('download', 'download')}
-                                className="px-5 py-2.5 bg-brand-primary text-white rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/20"
+                                className="flex-1 md:flex-none px-4 md:px-6 py-3 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/20 active:scale-95"
                             >
                                 <Download size={14} /> Export Statement
                             </button>
@@ -184,45 +186,48 @@ function OrdersPageContent() {
                                         animate={{ opacity: 1, y: 0 }}
                                         className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden group/order hover:shadow-xl hover:border-brand-primary/10 transition-all"
                                     >
-                                        <div className="px-7 py-4 bg-slate-900 flex justify-between items-center text-white">
-                                            <div className="flex gap-8">
+                                        <div className="px-5 md:px-7 py-4 bg-slate-900 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 text-white">
+                                            <div className="flex flex-wrap gap-x-6 gap-y-3">
                                                 <div>
-                                                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Deployment</p>
-                                                    <p className="text-xs font-bold">{order.date}</p>
+                                                    <p className="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Deployment</p>
+                                                    <p className="text-[10px] md:text-xs font-bold">{order.date}</p>
                                                 </div>
-                                                <div>
-                                                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Protocol ID</p>
-                                                    <p className="text-xs font-bold text-brand-accent">{order.id}</p>
+                                                <div className="min-w-0 flex-1 sm:flex-none">
+                                                    <p className="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Protocol ID</p>
+                                                    <p className="text-[10px] md:text-xs font-bold text-brand-accent truncate max-w-[120px] sm:max-w-none">{order.id}</p>
                                                 </div>
                                             </div>
                                             <div className={cn(
-                                                "px-4 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest border",
+                                                "w-fit px-3 py-1 rounded-lg text-[8px] md:text-[9px] font-black uppercase tracking-widest border",
                                                 order.status?.toLowerCase() === 'delivered' || order.status?.toLowerCase() === 'verified'
-                                                    ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                                                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
                                                     : order.status?.toLowerCase() === 'cancelled'
-                                                        ? 'bg-red-500/10 text-red-500 border-red-500/20'
-                                                        : 'bg-brand-primary/10 text-brand-primary border-brand-primary/20'
+                                                        ? 'bg-red-500/20 text-red-400 border-red-500/30'
+                                                        : 'bg-brand-primary/20 text-brand-primary border-brand-primary/30'
                                             )}>
                                                 {order.status?.toLowerCase() === 'delivered' ? 'Verified' : order.status?.toLowerCase() === 'cancelled' ? 'Cancelled' : order.status || 'Processing'}
                                             </div>
                                         </div>
 
-                                        <div className="p-7">
+                                        <div className="p-5 md:p-7">
                                             {order.items?.map((item: any) => (
-                                                <div key={item.id} className="flex items-center gap-6 mb-6 last:mb-0 last:pb-0">
-                                                    <div className="w-16 h-16 bg-slate-50 rounded-xl overflow-hidden p-2 flex-shrink-0 border border-slate-100">
-                                                        {item.image ? (
-                                                            <Image src={item.image} alt={item.name} width={64} height={64} className="w-full h-full object-contain" />
-                                                        ) : (
-                                                            <div className="w-full h-full bg-slate-100" />
-                                                        )}
+                                                <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-6 last:mb-0 pb-6 last:pb-0 border-b last:border-0 border-slate-50">
+                                                    <div className="flex items-center gap-4 flex-1">
+                                                        <div className="w-14 h-14 md:w-16 md:h-16 bg-slate-50 rounded-xl overflow-hidden p-2 flex-shrink-0 border border-slate-100">
+                                                            {item.image ? (
+                                                                <Image src={item.image} alt={item.name} width={64} height={64} className="w-full h-full object-contain" />
+                                                            ) : (
+                                                                <div className="w-full h-full bg-slate-100" />
+                                                            )}
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <h3 className="text-[13px] md:text-sm font-bold text-slate-800 mb-0.5 md:mb-1 truncate">{item.name}</h3>
+                                                            <p className="text-[10px] md:text-[11px] font-semibold text-slate-400">Qty: {item.quantity} • Unit: ₹{item.price.toLocaleString()}</p>
+                                                        </div>
                                                     </div>
-                                                    <div className="flex-1">
-                                                        <h3 className="text-sm font-bold text-slate-800 mb-1">{item.name}</h3>
-                                                        <p className="text-[11px] font-semibold text-slate-400">Quantity: {item.quantity} • Unit Price: ₹{item.price.toLocaleString()}</p>
-                                                    </div>
-                                                    <div className="text-right">
-                                                        <p className="text-sm font-bold text-slate-900">₹{(item.price * item.quantity).toLocaleString()}</p>
+                                                    <div className="flex sm:block justify-between items-center sm:text-right pt-2 sm:pt-0">
+                                                        <p className="sm:hidden text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Price</p>
+                                                        <p className="text-sm md:text-base font-black text-slate-900">₹{(item.price * item.quantity).toLocaleString()}</p>
                                                     </div>
                                                 </div>
                                             ))}

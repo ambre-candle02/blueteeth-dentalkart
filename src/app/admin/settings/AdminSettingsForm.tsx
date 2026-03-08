@@ -125,18 +125,19 @@ export default function AdminSettingsForm({ initialConfig }: { initialConfig: Gl
             </div>
 
             {/* Persistence Trigger */}
-            <div className="fixed bottom-8 right-8 z-50">
+            <div className="fixed bottom-5 right-4 sm:bottom-8 sm:right-8 z-50">
                 <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="flex items-center gap-3 bg-brand-dark text-white pl-6 pr-5 py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[9px] hover:bg-black hover:scale-105 transition-all shadow-xl shadow-brand-dark/20 disabled:opacity-70"
+                    className="flex items-center gap-2 sm:gap-3 bg-brand-dark text-white pl-4 sm:pl-6 pr-3.5 sm:pr-5 py-3 sm:py-4 rounded-xl font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[8px] sm:text-[9px] hover:bg-black hover:scale-105 transition-all shadow-xl shadow-brand-dark/20 disabled:opacity-70"
                 >
                     {loading ? (
-                        <Loader2 className="animate-spin" size={14} />
+                        <Loader2 className="animate-spin" size={12} />
                     ) : (
-                        <Save size={14} />
+                        <Save size={12} />
                     )}
-                    {loading ? "Synchronizing..." : "Synchronize System"}
+                    <span className="hidden sm:inline">{loading ? "Synchronizing..." : "Synchronize System"}</span>
+                    <span className="sm:hidden">{loading ? "Saving..." : "Save"}</span>
                 </button>
             </div>
         </div>

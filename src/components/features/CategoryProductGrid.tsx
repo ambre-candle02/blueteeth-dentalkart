@@ -45,17 +45,7 @@ export function CategoryProductGrid({ products }: Props) {
         }
     };
 
-    if (products.length === 0) {
-        return (
-            <div className="flex-1 bg-white rounded-2xl border border-slate-100 p-16 text-center shadow-sm">
-                <h3 className="text-xl font-bold text-slate-800 mb-2">No products found</h3>
-                <p className="text-slate-500 mb-6 text-sm">No products in this category right now.</p>
-                <Link href="/shop" className="inline-block bg-brand-primary text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-brand-dark transition-colors">
-                    Browse All Products
-                </Link>
-            </div>
-        );
-    }
+    if (products.length === 0) return null;
 
     return (
         <div className="flex-1">

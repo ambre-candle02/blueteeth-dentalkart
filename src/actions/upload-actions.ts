@@ -36,8 +36,8 @@ export async function uploadImageToCloudinary(formData: FormData) {
         // Extract custom folder if provided, else root
         const customFolder = formData.get('folder') as string;
         const targetFolder = customFolder
-            ? `blueteeth_dentalkart/${customFolder.replace(/[^a-zA-Z0-9_-]/g, '_')}`
-            : 'blueteeth_dentalkart';
+            ? `blueteeth_dentalstore/${customFolder.replace(/[^a-zA-Z0-9_-]/g, '_')}`
+            : 'blueteeth_dentalstore';
 
         // Upload to Cloudinary using upload_stream to support larger chunks
         const response: any = await new Promise((resolve, reject) => {

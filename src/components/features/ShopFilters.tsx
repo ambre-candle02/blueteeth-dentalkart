@@ -39,7 +39,7 @@ export function ShopFilters({ price, setPrice, selectedCats, selectedSubs, toggl
                 </div>
                 <button
                     onClick={clearFilters}
-                    className="p-2.5 rounded-xl bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-500 transition-all group"
+                    className="p-2.5 rounded-xl bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-500 transition-all active:scale-90 group"
                 >
                     <RotateCcw size={16} className="transition-transform" />
                 </button>
@@ -59,7 +59,7 @@ export function ShopFilters({ price, setPrice, selectedCats, selectedSubs, toggl
                                     <div
                                         onClick={() => toggleCat(cat.name)}
                                         className={cn(
-                                            "flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all border group",
+                                            "flex items-center justify-between p-3.5 rounded-2xl cursor-pointer transition-all border group active:scale-[0.98]",
                                             isSelected ? "bg-brand-primary/5 border-brand-primary/20" : "bg-white border-slate-50 hover:border-slate-200"
                                         )}
                                     >

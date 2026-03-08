@@ -41,44 +41,42 @@ export default function NewArrivalsPage() {
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[120px] -mr-64 -mt-64 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px] -ml-64 -mb-64 pointer-events-none" />
 
-            <div className="max-w-[1400px] w-full mx-auto px-8 sm:px-12 lg:px-16 xl:px-20 relative z-10">
-
-                <BackButton />
-
+            <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 relative z-10">
                 {/* NEW — Gradient Header Card */}
                 <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="relative w-full rounded-3xl overflow-hidden mb-8 bg-brand-primary/[0.04] border border-brand-primary/10 shadow-sm"
+                    className="relative w-full rounded-2xl md:rounded-3xl overflow-hidden mb-6 md:mb-8 bg-brand-primary/[0.04] border border-brand-primary/10 shadow-sm"
                 >
-                    <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-3.5 gap-3">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-center justify-between p-3 sm:px-6 sm:py-3.5 gap-3 sm:gap-4">
                         {/* Left */}
-                        <div className="flex items-center gap-4">
-                            <div className="w-8 h-8 rounded-xl bg-brand-primary flex items-center justify-center shadow-md shadow-brand-primary/20 shrink-0">
+                        <div className="flex items-center justify-start gap-3 sm:gap-4 w-full sm:w-auto">
+                            <BackButton className="bg-white/80 shrink-0 w-10 h-10 md:w-12 md:h-12 shadow-sm rounded-xl" />
+                            <div className="hidden xs:flex w-8 h-8 md:w-10 md:h-10 rounded-xl bg-brand-primary items-center justify-center shadow-md shadow-brand-primary/20 shrink-0">
                                 <Sparkles size={14} className="text-white" />
                             </div>
                             <div>
                                 <div className="flex items-center gap-2">
-                                    <h1 className="text-base font-black text-brand-dark tracking-tight">New Arrivals</h1>
-                                    <span className="bg-brand-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full">{newArrivals.length}</span>
+                                    <h1 className="text-lg md:text-xl font-black text-brand-dark tracking-tight">New Arrivals</h1>
+                                    <span className="bg-brand-primary text-white text-[10px] md:text-xs font-black px-2 py-0.5 rounded-full">{newArrivals.length}</span>
                                 </div>
-                                <p className="text-[11px] text-slate-500 mt-0.5">Fresh products, just added</p>
+                                <p className="text-[10px] md:text-[11px] text-slate-500 mt-0.5">Fresh products, just added</p>
                             </div>
                         </div>
 
                         {/* Right — Sort */}
-                        <div className="relative shrink-0">
+                        <div className="relative w-full sm:w-auto shrink-0 mt-1 sm:mt-0">
                             <select
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
-                                className="appearance-none bg-brand-primary text-white px-5 py-2.5 pr-10 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary/40 shadow-md hover:bg-brand-dark transition-all cursor-pointer"
+                                className="appearance-none w-full sm:w-auto bg-brand-primary text-white text-center sm:text-left px-5 py-2 md:py-2.5 pr-8 sm:pr-10 rounded-xl text-xs sm:text-sm font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary/40 shadow-md hover:bg-brand-dark transition-all cursor-pointer"
                             >
                                 <option value="newest">Newest First</option>
                                 <option value="price-low">Price: Low → High</option>
                                 <option value="price-high">Price: High → Low</option>
                                 <option value="rating">Top Rated</option>
                             </select>
-                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 w-4 h-4 pointer-events-none" />
+                            <ChevronDown className="absolute right-4 sm:right-3 top-1/2 -translate-y-1/2 text-white/80 w-4 h-4 pointer-events-none" />
                         </div>
                     </div>
                 </motion.div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types";
 import { motion, AnimatePresence } from "framer-motion";
+import NextImage from "next/image";
 
 export function ProductGallery({ product }: { product: Product }) {
     const [activeImage, setActiveImage] = useState(0);
@@ -32,16 +33,20 @@ export function ProductGallery({ product }: { product: Product }) {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 1.05, y: -10 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative z-10 w-full h-full flex items-center justify-center"
+                        className="relative z-10 w-full h-full flex items-center justify-center p-2 md:p-4"
                     >
                         {images[activeImage] ? (
-                            <img
-                                src={images[activeImage]!}
-                                alt={`${product.name} view ${activeImage + 1}`}
-                                className="w-full h-full object-contain drop-shadow-2xl"
-                            />
+                            <div className="relative w-full h-full">
+                                <NextImage
+                                    src={images[activeImage]!}
+                                    alt={`${product.name} view ${activeImage + 1}`}
+                                    fill
+                                    className="object-contain drop-shadow-2xl"
+                                    priority
+                                />
+                            </div>
                         ) : (
-                            <div className="text-slate-200 text-[120px] font-black select-none opacity-40 group-hover:opacity-60 transition-all duration-700 drop-shadow-2xl transform group-hover:scale-105">
+                            <div className="text-slate-200 text-6xl md:text-[120px] font-black select-none opacity-40 group-hover:opacity-60 transition-all duration-700 drop-shadow-2xl transform group-hover:scale-105">
                                 {product.name[0]}
                             </div>
                         )}
@@ -71,11 +76,13 @@ export function ProductGallery({ product }: { product: Product }) {
                         onClick={() => setActiveImage(idx)}
                     >
                         <div className={cn(
-                            "w-full h-full rounded-xl transition-all overflow-hidden flex items-center justify-center p-1",
+                            "w-full h-full rounded-xl transition-all overflow-hidden flex items-center justify-center p-0.5 md:p-1",
                             activeImage === idx ? "bg-brand-primary/10" : "bg-slate-50"
                         )}>
                             {img ? (
-                                <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-contain rounded-lg" />
+                                <div className="relative w-full h-full">
+                                    <NextImage src={img} alt={`Thumb ${idx + 1}`} fill className="object-contain rounded-lg" />
+                                </div>
                             ) : (
                                 <div className={cn(
                                     "w-full h-full flex items-center justify-center text-[10px] font-black transition-colors",

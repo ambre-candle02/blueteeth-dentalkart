@@ -111,7 +111,7 @@ export const sendPasswordResetEmail = async (email: string, resetLink: string) =
         const mailOptions = {
             from: process.env.EMAIL_USER || 'admin@example.com',
             to: email,
-            subject: '🔐 Reset Your Blueteeth Dentalkart Password',
+            subject: '🔐 Reset Your Blueteeth Dental Store Password',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f4f7ff; padding: 40px; border-radius: 24px;">
                     <div style="text-align: center; margin-bottom: 30px;">
@@ -122,7 +122,7 @@ export const sendPasswordResetEmail = async (email: string, resetLink: string) =
                     <div style="background-color: #ffffff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,86,210,0.05);">
                         <p style="font-size: 16px; color: #475569; line-height: 1.6;">Hello,</p>
                         <p style="font-size: 16px; color: #475569; line-height: 1.6;">
-                            We received a request to reset the password for your Blueteeth Dentalkart account. Click the button below to set a new password:
+                            We received a request to reset the password for your Blueteeth Dental Store account. Click the button below to set a new password:
                         </p>
                         
                         <div style="text-align: center; margin: 35px 0;">
@@ -137,7 +137,7 @@ export const sendPasswordResetEmail = async (email: string, resetLink: string) =
                     </div>
                     
                     <p style="text-align: center; margin-top: 30px; font-size: 12px; color: #94a3b8; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
-                        Blueteeth Dentalkart &copy; 2026
+                        Blueteeth Dental Store &copy; 2026
                     </p>
                 </div>
             `,
@@ -225,7 +225,7 @@ export const sendMembershipUpgradeNotification = async (userData: any, plan: any
                     </div>
                     
                     <p style="text-align: center; margin-top: 30px; font-size: 12px; color: #94a3b8; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
-                        Blueteeth Dentalkart &copy; 2026 Admin Portal
+                        Blueteeth Dental Store &copy; 2026 Admin Portal
                     </p>
                 </div>
             `,

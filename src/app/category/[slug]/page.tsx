@@ -8,56 +8,63 @@ import { BackButton } from "@/components/ui/BackButton";
 
 interface CategoryPageProps {
     params: Promise<{ slug: string }>;
+    searchParams: Promise<{ sub?: string }>;
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
     const { slug } = await params;
+    const { sub: subParam } = await searchParams;
 
     let categoryName = "";
     let parentCategory = "";
     let isMainCategory = false;
 
-    // Robust matching for subcategory
-    for (const cat of CATEGORIES) {
-        const sub = cat.subcategories.find(s => s.href.split('/').pop() === slug);
-        if (sub) {
-            categoryName = sub.name;
-            parentCategory = cat.name;
-            break;
+    // Robust matching for main category first
+    let mainCat = CATEGORIES.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === slug);
+
+    // Explicit Fallbacks for common legacy/hardcoded slugs
+    if (!mainCat) {
+        if (slug === 'dental-chairs' || slug === 'x-ray-sensors') {
+            mainCat = CATEGORIES.find(c => c.name === 'Equipment');
         }
     }
 
-    // Robust matching for main category
-    if (!categoryName) {
-        const mainCat = CATEGORIES.find(c => c.name.toLowerCase().replace(/\s+/g, '-') === slug);
-        if (mainCat) {
-            categoryName = mainCat.name;
-            isMainCategory = true;
-        }
+    if (mainCat) {
+        categoryName = mainCat.name;
+        isMainCategory = true;
     }
 
-    const currentCategory = CATEGORIES.find(c => c.name === (isMainCategory ? categoryName : parentCategory));
+    // If a sub parameter is provided, use it as the category name for filtering
+    const activeSubName = subParam ? subParam : null;
+
+    const currentCategory = CATEGORIES.find(c => c.name === categoryName);
     if (!categoryName) return notFound();
 
     // Filtering logic with normalization
     const categoryProducts = PRODUCTS.filter((product) => {
-        const productCat = (product.category || "").trim();
-        const targetCat = categoryName.trim();
+        const productCat = (product.category || "").trim().toLowerCase();
+        const pSubCat = (product.subCategory || "").trim().toLowerCase();
 
-        if (!isMainCategory) {
-            return productCat.toLowerCase() === targetCat.toLowerCase();
+        // If a specific sub-category is selected via URL query
+        if (activeSubName) {
+            const targetSub = activeSubName.toLowerCase();
+            return productCat === targetSub || pSubCat === targetSub;
         }
 
-        if (isMainCategory && currentCategory) {
-            return (
-                productCat.toLowerCase() === targetCat.toLowerCase() ||
-                currentCategory.subcategories.some(sub => sub.name.trim().toLowerCase() === productCat.toLowerCase())
-            );
-        }
-        return false;
+        // Default behavior: Show all products in the main category or its subcategories
+        const targetMainCat = categoryName.trim().toLowerCase();
+        return (
+            productCat === targetMainCat ||
+            (currentCategory?.subcategories.some(sub => {
+                const sName = sub.name.trim().toLowerCase();
+                return productCat === sName || pSubCat === sName;
+            }))
+        );
     });
 
     let pattiDesc = "Premium quality dental supplies for professionals.";
+    const displayTitle = activeSubName || categoryName;
+
     if (categoryName === 'Equipment') pattiDesc = "Modern dental chairs and clinical equipment.";
     else if (categoryName === 'Instruments') pattiDesc = "Precision tools for clinical excellence.";
     else if (categoryName === 'Consumables') pattiDesc = "High-quality materials for daily dentistry.";
@@ -70,30 +77,30 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <div className="max-w-[1500px] w-full mx-auto px-6 sm:px-10 lg:px-14">
 
                 {/* Compact Header (The "Patti") */}
-                <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden mb-10">
-                    <div className="relative p-7 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
-                        <div className="flex items-center gap-6 relative z-10 w-full md:w-auto">
+                <div className="bg-white rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm overflow-hidden mb-6 md:mb-10">
+                    <div className="relative p-4 md:p-8 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 overflow-hidden">
+                        <div className="flex items-center gap-3 md:gap-6 relative z-10 w-full md:w-auto">
                             {/* Dynamic Client-side Back Button */}
-                            <BackButton />
+                            <BackButton className="w-8 h-8 md:w-10 md:h-10" />
 
                             <div className="flex-1">
-                                <div className="flex items-center gap-3 mb-1">
-                                    <h1 className="text-2xl font-bold text-slate-900 tracking-tight">{categoryName}</h1>
-                                    <span className="bg-slate-100 text-slate-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">{categoryProducts.length} Items</span>
+                                <div className="flex items-center gap-2 md:gap-3">
+                                    <h1 className="text-lg md:text-2xl font-bold text-slate-900 tracking-tight leading-none">{displayTitle}</h1>
+                                    <span className="bg-slate-100 text-slate-600 text-[8px] md:text-[10px] font-bold px-1.5 md:px-3 py-0.5 md:py-1 rounded-full uppercase tracking-wider shrink-0">{categoryProducts.length} Items</span>
                                 </div>
-                                <p className="text-sm text-slate-500 font-medium">{pattiDesc}</p>
+                                <p className="text-[10px] md:text-sm text-slate-500 font-medium mt-0.5 line-clamp-1 md:line-clamp-none">{pattiDesc}</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 w-full md:w-auto relative z-10">
-                            <div className="relative group/sort flex-1 md:flex-initial">
-                                <select className="w-full appearance-none bg-brand-primary text-white px-8 py-3.5 pr-14 rounded-2xl text-[11px] font-bold uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-brand-primary/10 cursor-pointer hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/20">
+                        <div className="flex items-center gap-2 md:gap-4 w-full md:w-auto relative z-10 mt-1 md:mt-0">
+                            <div className="relative group/sort flex-1 md:flex-initial w-full sm:w-auto">
+                                <select className="w-full appearance-none bg-brand-primary text-white text-center sm:text-left px-5 md:px-8 py-2 md:py-3.5 pr-8 sm:pr-10 md:pr-14 rounded-xl md:rounded-2xl text-[9px] md:text-[11px] font-bold uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-brand-primary/10 cursor-pointer hover:bg-brand-dark transition-all shadow-md md:shadow-lg shadow-brand-primary/20">
                                     <option>Sort: Featured</option>
                                     <option>Price: Low to High</option>
                                     <option>Price: High to Low</option>
                                     <option>Top Rated</option>
                                 </select>
-                                <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" size={16} />
+                                <ChevronDown className="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" size={12} />
                             </div>
 
                             <div className="hidden xl:flex items-center gap-2 px-4 py-3 bg-brand-primary/5 rounded-2xl border border-brand-primary/10">
@@ -105,17 +112,25 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
                     {/* Compact Sub-nav tab bar */}
                     {isMainCategory && currentCategory && (
-                        <div className="bg-slate-50/50 border-t border-slate-100 px-8 overflow-x-auto no-scrollbar">
-                            <div className="flex items-center gap-6 py-3.5 min-w-max">
-                                {currentCategory.subcategories.map(sub => (
-                                    <Link
-                                        key={sub.name}
-                                        href={sub.href}
-                                        className="text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:text-brand-primary transition-all"
-                                    >
-                                        {sub.name}
-                                    </Link>
-                                ))}
+                        <div className="bg-slate-50/50 border-t border-slate-100 px-4 md:px-8 overflow-x-auto no-scrollbar">
+                            <div className="flex items-center gap-4 md:gap-6 py-2 md:py-3.5 min-w-max">
+                                {currentCategory.subcategories.map(sub => {
+                                    const isActive = activeSubName === sub.name;
+                                    return (
+                                        <Link
+                                            key={sub.name}
+                                            href={sub.href}
+                                            className={cn(
+                                                "text-[10px] md:text-[12px] font-bold uppercase tracking-widest transition-all py-1.5 md:py-2 border-b-2",
+                                                isActive
+                                                    ? "text-brand-primary border-brand-primary"
+                                                    : "text-slate-400 border-transparent hover:text-brand-primary"
+                                            )}
+                                        >
+                                            {sub.name}
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         </div>
                     )}
@@ -144,20 +159,23 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                                                 {cat.name}
                                             </Link>
 
-                                            {(cat.name === (parentCategory || categoryName)) && (
+                                            {(cat.name === (categoryName)) && (
                                                 <div className="ml-4 border-l-2 border-slate-100 pl-3 py-1 space-y-1 my-1">
-                                                    {cat.subcategories.map(sub => (
-                                                        <Link
-                                                            key={sub.name}
-                                                            href={sub.href}
-                                                            className={cn(
-                                                                "block text-[11px] font-bold py-2 px-3 rounded-lg transition-colors",
-                                                                categoryName === sub.name ? "text-brand-primary" : "text-slate-500 hover:text-brand-primary"
-                                                            )}
-                                                        >
-                                                            {sub.name}
-                                                        </Link>
-                                                    ))}
+                                                    {cat.subcategories.map(sub => {
+                                                        const isActive = activeSubName === sub.name;
+                                                        return (
+                                                            <Link
+                                                                key={sub.name}
+                                                                href={sub.href}
+                                                                className={cn(
+                                                                    "block text-[12px] font-bold py-2.5 px-3 rounded-lg transition-colors",
+                                                                    isActive ? "text-brand-primary bg-brand-primary/5" : "text-slate-500 hover:text-brand-primary hover:bg-slate-50"
+                                                                )}
+                                                            >
+                                                                {sub.name}
+                                                            </Link>
+                                                        );
+                                                    })}
                                                 </div>
                                             )}
                                         </div>
@@ -179,12 +197,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                         <CategoryProductGrid products={categoryProducts} />
 
                         {categoryProducts.length === 0 && (
-                            <div className="mt-12 bg-white rounded-3xl border border-slate-100 p-20 text-center">
+                            <div className="mt-8 md:mt-12 bg-white rounded-3xl border border-slate-100 p-10 md:p-20 text-center flex flex-col items-center justify-center">
                                 <h3 className="text-lg font-bold text-slate-800 mb-2">No products found</h3>
                                 <p className="text-slate-400 text-sm font-medium mb-8">This collection is being updated.</p>
                                 <Link
-                                    href="/collection"
-                                    className="px-8 py-3.5 bg-brand-primary text-white rounded-xl font-bold text-[11px] uppercase tracking-widest"
+                                    href="/shop"
+                                    className="px-6 md:px-8 py-3 md:py-3.5 bg-brand-primary text-white rounded-xl font-bold text-[10px] md:text-[11px] uppercase tracking-widest transition-transform active:scale-95 text-center leading-relaxed"
                                 >
                                     Browse Other Collections
                                 </Link>

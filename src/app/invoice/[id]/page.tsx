@@ -24,40 +24,61 @@ export default async function InvoicePage({ params }: { params: { id: string } }
     return (
         <div className="bg-slate-100 min-h-screen p-4 sm:p-8 font-sans print:p-0 print:bg-white flex justify-center">
 
-            <div className="bg-white max-w-4xl w-full shadow-2xl print:shadow-none p-10 sm:p-14 md:p-16 border border-slate-200">
+            {/* Document Toolbar (Action Buttons) */}
+            <div className="fixed top-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50 print:hidden">
+                <div className="max-w-4xl mx-auto flex justify-between items-center px-4">
+                    <a href="/orders" className="text-slate-500 hover:text-slate-900 font-black uppercase tracking-[0.15em] text-[10px] flex items-center gap-2 transition-colors">
+                        ← Back to Orders
+                    </a>
+                    <div className="flex gap-3">
+                        <PrintButton />
+                    </div>
+                </div>
+            </div>
+
+            <div className="bg-white max-w-4xl w-full shadow-2xl print:shadow-none p-6 sm:p-10 md:p-16 border border-slate-200 mt-20 md:mt-24">
                 {/* Header section */}
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
                     <div>
                         <div className="w-14 h-14 bg-brand-primary rounded-2xl flex items-center justify-center font-black text-white text-3xl tracking-tighter mb-4 shadow-xl shadow-brand-primary/20">B</div>
                         <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-1">Blueteeth</h1>
-                        <p className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">Premium Dentalkart</p>
+                        <p className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">Premium Dental Store</p>
                     </div>
-                    <div className="text-left md:text-right">
-                        <h2 className="text-5xl font-black text-slate-200 uppercase tracking-tighter">Invoice</h2>
-                        <div className="mt-4 flex flex-col md:items-end gap-1">
-                            <p className="text-sm font-bold text-slate-900"><span className="text-[10px] font-black tracking-widest text-slate-400 uppercase mr-3">Date</span> {new Date(date).toLocaleDateString()}</p>
-                            <p className="text-sm font-bold text-slate-900"><span className="text-[10px] font-black tracking-widest text-slate-400 uppercase mr-3">Invoice No</span> {orderId}</p>
-                            <p className="text-sm font-bold text-emerald-600"><span className="text-[10px] font-black tracking-widest text-slate-400 uppercase mr-3">Status</span> {paymentStatus || "Paid"}</p>
+                    <div className="text-left md:text-right w-full md:w-auto">
+                        <h2 className="text-4xl md:text-5xl font-black text-slate-100 uppercase tracking-tighter leading-none">Invoice</h2>
+                        <div className="mt-4 flex flex-col items-start md:items-end gap-1.5 md:gap-1">
+                            <p className="text-[13px] md:text-sm font-bold text-slate-900 flex items-center md:justify-end w-full">
+                                <span className="text-[9px] md:text-[10px] font-black tracking-widest text-slate-400 uppercase mr-3">Date</span>
+                                {new Date(date).toLocaleDateString()}
+                            </p>
+                            <p className="text-[13px] md:text-sm font-bold text-slate-900 flex items-center md:justify-end w-full">
+                                <span className="text-[9px] md:text-[10px] font-black tracking-widest text-slate-400 uppercase mr-3">Invoice No</span>
+                                {orderId.length > 15 ? `${orderId.substring(0, 12)}...` : orderId}
+                            </p>
+                            <p className="text-[13px] md:text-sm font-bold text-emerald-600 flex items-center md:justify-end w-full">
+                                <span className="text-[9px] md:text-[10px] font-black tracking-widest text-slate-400 uppercase mr-3">Status</span>
+                                {paymentStatus || "Paid"}
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 {/* Addresses */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-b border-slate-100 py-10 mb-12">
-                    <div>
-                        <p className="text-[10px] font-black tracking-widest text-brand-primary uppercase mb-3">Billed To</p>
-                        <h3 className="text-lg font-black text-slate-900 mb-1">{customer?.name || shippingAddress?.fullName || "Premium Healthcare Partner"}</h3>
-                        <p className="text-sm font-medium text-slate-500 mb-1">{shippingAddress?.address || "Address not provided"}</p>
-                        <p className="text-sm font-medium text-slate-500 mb-1">{shippingAddress?.city}, {shippingAddress?.state} {shippingAddress?.pinCode}</p>
-                        <p className="text-sm font-medium text-slate-500">{customer?.mobile || shippingAddress?.phone}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 border-t border-b border-slate-100 py-8 md:py-10 mb-8 md:mb-12">
+                    <div className="space-y-1">
+                        <p className="text-[9px] md:text-[10px] font-black tracking-widest text-brand-primary uppercase mb-2 md:mb-3">Billed To</p>
+                        <h3 className="text-base md:text-lg font-black text-slate-900 leading-tight">{customer?.name || shippingAddress?.fullName || "Premium Healthcare Partner"}</h3>
+                        <p className="text-[13px] md:text-sm font-medium text-slate-500">{shippingAddress?.address || "Address not provided"}</p>
+                        <p className="text-[13px] md:text-sm font-medium text-slate-500">{shippingAddress?.city}, {shippingAddress?.state} {shippingAddress?.pinCode}</p>
+                        <p className="text-[13px] md:text-sm font-medium text-slate-500 pt-1">{customer?.mobile || shippingAddress?.phone}</p>
                     </div>
 
-                    <div className="md:text-right">
-                        <p className="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-3">Issued By</p>
-                        <h3 className="text-lg font-black text-slate-900 mb-1">Blueteeth Corp.</h3>
-                        <p className="text-sm font-medium text-slate-500 mb-1">Chirag Delhi Metro Stn, Masjid Moth</p>
-                        <p className="text-sm font-medium text-slate-500 mb-1">New Delhi, ND-110017, India</p>
-                        <p className="text-sm font-medium text-brand-primary">finance@blueteeth.store</p>
+                    <div className="md:text-right space-y-1">
+                        <p className="text-[9px] md:text-[10px] font-black tracking-widest text-slate-400 uppercase mb-2 md:mb-3">Issued By</p>
+                        <h3 className="text-base md:text-lg font-black text-slate-900 leading-tight">Blueteeth Corp.</h3>
+                        <p className="text-[13px] md:text-sm font-medium text-slate-500">Chirag Delhi Metro Stn, Masjid Moth</p>
+                        <p className="text-[13px] md:text-sm font-medium text-slate-500">New Delhi, ND-110017, India</p>
+                        <p className="text-[13px] md:text-sm font-medium text-brand-primary pt-1">finance@blueteeth.store</p>
                     </div>
                 </div>
 
@@ -125,13 +146,6 @@ export default async function InvoicePage({ params }: { params: { id: string } }
                 </div>
             </div>
 
-            {/* Print Button (Hidden in Print Mode) */}
-            <div className="fixed bottom-10 right-10 print:hidden z-50 flex gap-4">
-                <a href="/orders" className="bg-white text-slate-900 px-6 py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[10px] shadow-2xl border border-slate-200 hover:bg-slate-50 transition-all flex items-center justify-center">
-                    Back
-                </a>
-                <PrintButton />
-            </div>
 
             <style dangerouslySetInnerHTML={{
                 __html: `

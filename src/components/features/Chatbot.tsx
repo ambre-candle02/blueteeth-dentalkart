@@ -70,7 +70,7 @@ export function Chatbot() {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                         onClick={() => setIsOpen(true)}
-                        className="fixed bottom-6 right-6 w-14 h-14 bg-brand-primary text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-brand-dark transition-colors z-50 group hover:scale-110 active:scale-95"
+                        className="fixed bottom-[100px] md:bottom-8 right-4 md:right-6 w-14 h-14 bg-brand-primary text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-brand-dark transition-colors z-50 group hover:scale-110 active:scale-95"
                     >
                         <MessageSquare className="w-6 h-6 transition-transform" />
                         <span className="absolute -top-1 -right-1 flex h-4 w-4">

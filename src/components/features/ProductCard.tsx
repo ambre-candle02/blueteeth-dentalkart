@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Star, Heart, Eye, ShoppingCart } from "lucide-react";
+import Image from "next/image";
 import { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -55,9 +56,11 @@ export function ProductCard({ product }: ProductCardProps) {
 
     return (
         <motion.div
-            whileHover={{ y: -5, scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="group relative bg-white border border-blue-200 rounded-3xl overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] transition-all duration-500 hover:shadow-[0_25px_50px_rgba(0,86,210,0.18)] hover:border-blue-300"
+            initial={false}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            className="group relative bg-white border border-blue-100 rounded-3xl overflow-hidden shadow-md transition-all duration-200 hover:shadow-xl hover:border-blue-200"
         >
             {/* Badges */}
             <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
@@ -93,16 +96,19 @@ export function ProductCard({ product }: ProductCardProps) {
 
             {/* Image Area */}
             <div
-                className="cursor-pointer"
+                className="cursor-pointer active:opacity-80 transition-opacity"
                 onClick={() => router.push(`/product/${product.id}`)}
             >
                 <div className="relative h-48 w-full bg-slate-50 p-5 flex items-center justify-center">
                     {product.image ? (
                         <div className="relative w-full h-full">
-                            <img
+                            <Image
                                 src={product.image}
                                 alt={product.name}
-                                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                className="object-contain group-hover:scale-105 transition-transform duration-500 p-2"
+                                loading="lazy"
                             />
                         </div>
                     ) : (
@@ -111,8 +117,8 @@ export function ProductCard({ product }: ProductCardProps) {
                         </div>
                     )}
 
-                    {/* Quick View Overlay */}
-                    <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px] flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                    {/* Quick View Overlay - Simplified for mobile performance */}
+                    <div className="absolute inset-0 bg-slate-900/10 md:bg-black/20 md:backdrop-blur-[2px] flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 hidden md:flex">
                         <button
                             className="bg-white/80 backdrop-blur-sm text-slate-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-light hover:text-brand-primary transition-all duration-300 shadow-sm hover:scale-110"
                             title="Quick View"

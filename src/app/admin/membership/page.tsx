@@ -80,24 +80,24 @@ export default function AdminMembershipPage() {
     };
 
     return (
-        <div className="max-w-7xl mx-auto space-y-10 animate-in fade-in duration-700 pb-20">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-8 sm:space-y-10 animate-in fade-in duration-700 pb-20">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
                 <div>
-                    <h1 className="text-3xl font-black text-slate-900 tracking-tight uppercase tracking-widest text-sm">Clinical Tier Management</h1>
-                    <p className="text-[11px] text-slate-500 mt-1 font-bold uppercase tracking-widest opacity-60 italic">Ecosystem // Membership Protocols</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase tracking-widest text-sm">Clinical Tier Management</h1>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 mt-1 font-bold uppercase tracking-widest opacity-60 italic">Ecosystem // Membership Protocols</p>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-3">
                     <button
                         onClick={handleSeed}
-                        className="flex items-center gap-3 px-6 py-4 bg-white/60 backdrop-blur-md border border-blue-200/50 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-blue-600 transition-all text-slate-500 shadow-sm"
+                        className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white/60 backdrop-blur-md border border-blue-200/50 rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-blue-600 transition-all text-slate-500 shadow-sm"
                     >
-                        <RefreshCw size={14} strokeWidth={3} /> Seed Defaults
+                        <RefreshCw size={12} strokeWidth={3} /> Seed Defaults
                     </button>
                     <button
                         onClick={() => setEditingPlan({ name: "", price: 0, desc: "", features: [], icon: "Award", color: "blue", highlight: false })}
-                        className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/30 ring-4 ring-blue-500/5"
+                        className="flex items-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-blue-600 text-white rounded-xl sm:rounded-2xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/30 ring-4 ring-blue-500/5"
                     >
-                        <Plus size={16} strokeWidth={3} /> Create Tier
+                        <Plus size={14} strokeWidth={3} /> Create Tier
                     </button>
                 </div>
             </div>

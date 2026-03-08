@@ -194,23 +194,26 @@ export default function SettingsPage() {
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="mb-8 flex items-center justify-between"
-                >
-                    <BackButton />
-                    <div className="px-5 py-1.5 bg-transparent border border-brand-primary/20 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary">
-                        System Configuration
-                    </div>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
+                    className="relative w-full rounded-2xl md:rounded-[2rem] overflow-hidden mb-10 bg-white border-2 border-slate-100 shadow-xl shadow-slate-200/40"
                 >
-                    <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-2">Workspace <span className="text-brand-primary">Preferences</span></h1>
-                    <p className="text-slate-500 text-sm md:text-base font-medium max-w-lg mb-10">Manage your clinical identity, financial conduits, and operational intelligence settings.</p>
+                    <div className="flex flex-col md:flex-row items-center justify-between p-4 md:p-8 gap-4 md:gap-8">
+                        <div className="flex items-center gap-4 md:gap-8 w-full md:w-auto">
+                            <BackButton className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-slate-50 border-slate-100 text-brand-primary hover:bg-brand-primary hover:text-white transition-all shadow-sm shrink-0" />
+                            <div className="flex flex-col">
+                                <div className="flex flex-col-reverse md:flex-row md:items-center gap-1 md:gap-3 mb-1 md:mb-0">
+                                    <h1 className="text-xl md:text-4xl font-black text-slate-900 tracking-tighter">Workspace <span className="text-brand-primary">Preferences</span></h1>
+                                    <div className="w-fit px-3 py-1 bg-brand-primary/5 border border-brand-primary/10 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest text-brand-primary/60">
+                                        System Configuration
+                                    </div>
+                                </div>
+                                <p className="text-slate-500 text-[11px] md:text-sm font-medium mt-1 md:mt-2 line-clamp-1 md:line-clamp-none leading-relaxed">
+                                    Manage your clinical identity, financial conduits, and operational intelligence settings.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </motion.div>
 
                 <div className="flex flex-col lg:flex-row gap-8 min-h-[700px]">
@@ -281,7 +284,7 @@ export default function SettingsPage() {
                             })}
                         </nav>
 
-                        <div className="mt-auto pt-4">
+                        <div className="mt-auto pt-4 hidden lg:block">
                             <button onClick={() => signOut({ callbackUrl: '/' })} className="w-full py-4 text-[10px] font-black uppercase tracking-widest text-rose-600 bg-rose-100 hover:bg-rose-200 rounded-2xl flex justify-center items-center gap-2 transition-all border border-rose-200 hover:border-rose-300 active:scale-95">
                                 <LogOut size={14} /> Sever Connection
                             </button>
@@ -293,7 +296,7 @@ export default function SettingsPage() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="flex-1 bg-white rounded-[2.5rem] border border-white shadow-[0_25px_60px_rgba(0,0,0,0.05)] p-8 md:p-14 relative overflow-hidden"
+                        className="flex-1 bg-white rounded-[2.5rem] border border-white shadow-[0_25px_60px_rgba(0,0,0,0.05)] p-5 md:p-14 relative overflow-hidden"
                     >
                         {/* Interactive Dynamic Background */}
                         <div className="absolute top-0 right-0 w-full h-[300px] bg-gradient-to-b from-brand-primary/5 to-transparent pointer-events-none" />
@@ -377,7 +380,7 @@ export default function SettingsPage() {
                                             <button
                                                 onClick={handleSaveProfile}
                                                 disabled={isSaving}
-                                                className="w-full sm:w-auto relative overflow-hidden group bg-slate-900 hover:bg-brand-primary text-white font-black uppercase tracking-[0.2em] text-[10px] px-10 py-4 rounded-2xl transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(0,100,255,0.3)] disabled:opacity-70 disabled:cursor-not-allowed"
+                                                className="w-full sm:w-auto relative overflow-hidden group bg-brand-primary hover:bg-brand-dark text-white font-black uppercase tracking-[0.2em] text-[10px] px-10 py-4 rounded-2xl transition-all duration-300 shadow-[0_10px_20px_rgba(0,100,255,0.2)] hover:shadow-[0_15px_30px_rgba(0,100,255,0.3)] disabled:opacity-70 disabled:cursor-not-allowed"
                                             >
                                                 <span className={`flex items-center gap-2 justify-center transition-opacity duration-300 ${isSaving ? 'opacity-0' : 'opacity-100'}`}>
                                                     <Save size={14} /> Commit Changes
@@ -483,16 +486,18 @@ export default function SettingsPage() {
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 exit={{ opacity: 0, y: -10 }}
-                                                className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.04)]"
+                                                className="bg-white p-5 md:p-8 rounded-[2rem] border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.04)]"
                                             >
-                                                <div className="flex justify-between items-center mb-6">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="p-2 bg-brand-primary/10 rounded-lg text-brand-primary"><MapPin size={20} /></div>
-                                                        <h3 className="font-black text-slate-900 text-xl tracking-tight">New Route Configuration</h3>
+                                                <div className="flex items-center justify-between mb-8 gap-2">
+                                                    <div className="flex items-center gap-2 md:gap-3 flex-1">
+                                                        <div className="p-2 bg-brand-primary/10 rounded-lg text-brand-primary shrink-0 hidden sm:block">
+                                                            <MapPin size={20} />
+                                                        </div>
+                                                        <h3 className="font-black text-slate-900 text-base md:text-xl tracking-tight leading-tight">New Route</h3>
                                                     </div>
                                                     <button
                                                         onClick={() => setIsAddingRoute(false)}
-                                                        className="text-slate-400 hover:text-rose-500 font-bold text-xs uppercase tracking-widest transition-colors px-4 py-2 bg-slate-50 hover:bg-rose-50 rounded-lg"
+                                                        className="shrink-0 text-slate-400 hover:text-rose-500 font-bold text-[9px] md:text-xs uppercase tracking-widest transition-colors px-3 py-1.5 bg-slate-50 hover:bg-rose-50 rounded-lg border border-slate-100"
                                                     >
                                                         Cancel
                                                     </button>
@@ -521,7 +526,7 @@ export default function SettingsPage() {
                                                         <button
                                                             onClick={handleSaveAddressRoute}
                                                             disabled={isSaving}
-                                                            className="w-full md:w-auto px-10 py-4 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-primary transition-all flex items-center justify-center gap-2 shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(0,100,255,0.3)] disabled:opacity-70 disabled:cursor-not-allowed group"
+                                                            className="w-full md:w-auto px-10 py-4 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-dark transition-all flex items-center justify-center gap-2 shadow-[0_10px_20px_rgba(0,100,255,0.2)] hover:shadow-[0_15px_30px_rgba(0,100,255,0.3)] disabled:opacity-70 disabled:cursor-not-allowed group"
                                                         >
                                                             {isSaving ? (
                                                                 <span className="flex items-center gap-2"><div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Processing</span>
@@ -545,33 +550,33 @@ export default function SettingsPage() {
                                     <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-1">Financial Conduits</h2>
                                     <p className="text-slate-500 font-medium text-sm mb-8">Encrypted secure payment vault and billing links.</p>
 
-                                    <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl shadow-slate-900/40 mb-8 max-w-sm hover:scale-[1.02] transition-transform">
+                                    <div className="bg-slate-900 rounded-[1.5rem] md:rounded-3xl p-6 md:p-8 text-white relative overflow-hidden shadow-2xl shadow-slate-900/40 mb-8 w-full max-w-[340px] md:max-w-sm hover:scale-[1.02] transition-transform mx-auto md:mx-0">
                                         <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 blur-3xl rounded-full" />
                                         <div className="absolute bottom-[-10px] right-[-10px]"><CreditCard size={120} className="text-white/5 shadow-inner" /></div>
 
-                                        <div className="flex justify-between items-center mb-10 relative z-10">
-                                            <div className="w-12 h-8 rounded bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                                                <div className="w-6 h-5 stroke-2 border-2 border-slate-900/50 rounded-sm bg-gradient-to-br from-amber-200 to-amber-400" />
+                                        <div className="flex justify-between items-center mb-8 md:mb-10 relative z-10">
+                                            <div className="w-10 h-7 md:w-12 md:h-8 rounded bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                                                <div className="w-5 h-4 md:w-6 md:h-5 stroke-2 border2 border-slate-900/50 rounded-sm bg-gradient-to-br from-amber-200 to-amber-400" />
                                             </div>
                                             <div className="flex flex-col items-end gap-1">
-                                                <p className="font-black italic text-xl drop-shadow-md">VISA</p>
-                                                <span className="text-[8px] bg-red-500/80 px-2 py-0.5 rounded text-white tracking-widest uppercase font-black">ON HOLD</span>
+                                                <p className="font-black italic text-lg md:text-xl drop-shadow-md">VISA</p>
+                                                <span className="text-[7px] md:text-[8px] bg-red-500/80 px-2 py-0.5 rounded text-white tracking-widest uppercase font-black">ON HOLD</span>
                                             </div>
                                         </div>
-                                        <p className="font-mono text-xl tracking-[0.2em] mb-4 text-slate-200">**** **** **** 4892</p>
+                                        <p className="font-mono text-lg md:text-xl tracking-[0.15em] md:tracking-[0.2em] mb-4 text-slate-200">**** **** **** 4892</p>
                                         <div className="flex justify-between items-end relative z-10">
-                                            <div>
-                                                <p className="text-[8px] uppercase tracking-widest text-slate-400 font-bold mb-1">Cardholder Entity</p>
-                                                <p className="font-bold tracking-widest uppercase text-sm">{session?.user?.name || 'Authorized User'}</p>
+                                            <div className="flex-1">
+                                                <p className="text-[7px] md:text-[8px] uppercase tracking-widest text-slate-400 font-bold mb-1">Cardholder Entity</p>
+                                                <p className="font-bold tracking-widest uppercase text-xs md:text-sm truncate pr-2">{session?.user?.name || 'Authorized User'}</p>
                                             </div>
-                                            <div>
-                                                <p className="text-[8px] uppercase tracking-widest text-slate-400 font-bold mb-1">Valid Thru</p>
-                                                <p className="font-bold tracking-widest text-sm">12/28</p>
+                                            <div className="shrink-0 bg-white/5 p-2 rounded-xl backdrop-blur-sm border border-white/10">
+                                                <p className="text-[7px] md:text-[8px] uppercase tracking-widest text-slate-400 font-bold mb-0.5">Valid Thru</p>
+                                                <p className="font-bold tracking-widest text-xs md:text-sm">12/28</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button disabled className="px-6 py-3.5 bg-slate-100 text-slate-400 rounded-xl text-xs font-black uppercase tracking-[0.1em] flex items-center gap-2 border border-slate-200 cursor-not-allowed">
+                                    <button disabled className="mx-auto md:mx-0 w-fit px-6 py-3.5 bg-slate-100 text-slate-400 rounded-xl text-xs font-black uppercase tracking-[0.1em] flex items-center gap-2 border border-slate-200 cursor-not-allowed shadow-inner">
                                         <CreditCard size={16} /> Integration Pending
                                     </button>
                                 </motion.div>
@@ -582,34 +587,40 @@ export default function SettingsPage() {
                                     key="security"
                                     initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="relative z-10 max-w-xl"
                                 >
-                                    <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-1">Access Control Matrix</h2>
-                                    <p className="text-slate-500 font-medium text-sm mb-8">Update cryptographic keys & view active sessions.</p>
+                                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-1">Access Control Matrix</h2>
+                                    <p className="text-slate-500 font-medium text-[11px] md:text-sm mb-8">Update cryptographic keys & view active sessions.</p>
 
                                     <div className="space-y-6">
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Current Authorization Key</label>
-                                            <input type="password" value={passwordData.current} onChange={(e) => setPasswordData({ ...passwordData, current: e.target.value })} placeholder="••••••••" className="w-full px-5 py-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/20 transition-all font-bold text-slate-900" />
+                                        <div className="flex flex-col gap-2 group">
+                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-focus-within:text-brand-primary transition-colors">Current Authorization Key</label>
+                                            <input type="password" value={passwordData.current} onChange={(e) => setPasswordData({ ...passwordData, current: e.target.value })} placeholder="••••••••" className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-primary/30 focus:shadow-[0_0_20px_rgba(0,100,255,0.07)] transition-all font-bold text-slate-900 text-sm" />
                                         </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">New Authorization Key</label>
-                                            <input type="password" value={passwordData.new} onChange={(e) => setPasswordData({ ...passwordData, new: e.target.value })} placeholder="Enter new password" className="w-full px-5 py-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary/20 transition-all font-bold text-slate-900" />
+                                        <div className="flex flex-col gap-2 group">
+                                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-focus-within:text-brand-primary transition-colors">New Authorization Key</label>
+                                            <input type="password" value={passwordData.new} onChange={(e) => setPasswordData({ ...passwordData, new: e.target.value })} placeholder="Enter new password" className="w-full px-5 py-4 rounded-2xl border-2 border-slate-100 bg-slate-50/50 focus:bg-white focus:outline-none focus:border-brand-primary/30 focus:shadow-[0_0_20px_rgba(0,100,255,0.07)] transition-all font-bold text-slate-900 text-sm" />
                                         </div>
-                                        <div className="pt-4 flex items-center justify-between p-5 border border-amber-200 bg-amber-50 rounded-2xl relative overflow-hidden group">
+                                        <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between p-5 border border-amber-200 bg-amber-50/50 rounded-2xl relative overflow-hidden group gap-4">
                                             <div className="absolute right-0 top-0 w-32 h-32 bg-amber-200/40 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-150 transition-transform" />
                                             <div className="relative z-10">
                                                 <h4 className="font-bold text-slate-900 text-sm mb-1 text-amber-900 flex items-center gap-2">
                                                     Two-Factor Auth (2FA) <Shield size={14} className="text-amber-500" />
                                                 </h4>
-                                                <p className="text-xs text-amber-700/70 font-medium">Add an extra layer of structural integrity.</p>
+                                                <p className="text-[10px] md:text-xs text-amber-700/70 font-medium leading-relaxed">Add an extra layer of structural integrity.</p>
                                             </div>
-                                            <button disabled className="bg-amber-100/50 text-amber-800/50 px-5 py-2.5 font-black text-[10px] uppercase tracking-widest rounded-lg shadow-sm relative z-10 border border-amber-200/50 cursor-not-allowed">
+                                            <button disabled className="w-fit bg-white/80 text-amber-800/50 px-5 py-2.5 font-black text-[10px] uppercase tracking-widest rounded-xl shadow-sm relative z-10 border border-amber-200/50 cursor-not-allowed">
                                                 Coming Soon
                                             </button>
                                         </div>
 
-                                        <button onClick={handleSavePassword} disabled={isSaving} className="mt-4 px-8 py-4 bg-slate-900 text-white rounded-xl text-xs font-black uppercase tracking-[0.1em] hover:bg-brand-primary transition-all flex items-center gap-2 shadow-lg disabled:opacity-70">
-                                            {isSaving ? <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Processing</span> : <><Shield size={16} /> Update Security Protocols</>}
-                                        </button>
+                                        <div className="pt-4">
+                                            <button onClick={handleSavePassword} disabled={isSaving} className="w-full sm:w-auto px-8 py-4 bg-brand-primary hover:bg-brand-dark text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-[0_10px_20px_rgba(0,100,255,0.2)] hover:shadow-[0_15px_30px_rgba(0,100,255,0.3)] disabled:opacity-70 group">
+                                                {isSaving ? (
+                                                    <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Processing</span>
+                                                ) : (
+                                                    <><Shield size={16} className="group-hover:scale-110 transition-transform" /> Update Security Protocols</>
+                                                )}
+                                            </button>
+                                        </div>
                                     </div>
                                 </motion.div>
                             )}
@@ -632,24 +643,26 @@ export default function SettingsPage() {
                                             const isActive = item.locked ? true : notificationsPrefs[item.id as keyof typeof notificationsPrefs];
 
                                             return (
-                                                <div key={i} className="flex items-center justify-between p-5 border border-slate-100 rounded-2xl bg-white hover:border-slate-200 transition-colors shadow-sm">
-                                                    <div>
-                                                        <h4 className="font-bold text-slate-900 text-sm mb-1">{item.title}</h4>
-                                                        <p className="text-xs text-slate-500 font-medium">{item.desc}</p>
+                                                <div key={i} className="flex items-center justify-between p-4 md:p-5 border border-slate-100 rounded-2xl bg-white hover:border-slate-200 transition-colors shadow-sm gap-4">
+                                                    <div className="flex-1 min-w-0">
+                                                        <h4 className="font-bold text-slate-900 text-[13px] md:text-sm mb-0.5 md:mb-1 truncate md:whitespace-normal">{item.title}</h4>
+                                                        <p className="text-[10px] md:text-xs text-slate-500 font-medium leading-tight line-clamp-2 md:line-clamp-none">{item.desc}</p>
                                                     </div>
-                                                    <div>
+                                                    <div className="shrink-0">
                                                         {item.locked ? (
-                                                            <div className="bg-slate-50 border border-slate-200 px-3 py-1 rounded-full text-[9px] font-black text-slate-400 tracking-widest uppercase shadow-inner">Force ON</div>
+                                                            <div className="bg-slate-50 border border-slate-200 px-3 py-1 rounded-full text-[8px] md:text-[9px] font-black text-slate-400 tracking-widest uppercase shadow-inner whitespace-nowrap">
+                                                                Force ON
+                                                            </div>
                                                         ) : (
                                                             <div
                                                                 onClick={() => toggleNotification(item.id as keyof typeof notificationsPrefs)}
-                                                                className={`w-12 h-6 rounded-full relative cursor-pointer shadow-inner transition-colors duration-300 ${isActive ? 'bg-brand-primary hover:bg-brand-dark' : 'bg-slate-200 hover:bg-slate-300'}`}
+                                                                className={`w-10 h-5 md:w-12 md:h-6 rounded-full relative cursor-pointer shadow-inner transition-colors duration-300 ${isActive ? 'bg-brand-primary hover:bg-brand-dark' : 'bg-slate-200 hover:bg-slate-300'}`}
                                                             >
                                                                 <motion.div
                                                                     initial={false}
-                                                                    animate={{ x: isActive ? 26 : 4 }}
+                                                                    animate={{ x: isActive ? (typeof window !== 'undefined' && window.innerWidth < 768 ? 22 : 26) : 4 }}
                                                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                                                    className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm flex items-center justify-center"
+                                                                    className="absolute top-0.5 md:top-1 w-4 h-4 rounded-full bg-white shadow-sm flex items-center justify-center"
                                                                 />
                                                             </div>
                                                         )}
@@ -661,6 +674,13 @@ export default function SettingsPage() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
+
+                        {/* Mobile Only Logout Button */}
+                        <div className="mt-12 pt-8 border-t border-slate-100 lg:hidden">
+                            <button onClick={() => signOut({ callbackUrl: '/' })} className="w-full py-4 text-[10px] font-black uppercase tracking-widest text-rose-600 bg-rose-100 hover:bg-rose-200 rounded-2xl flex justify-center items-center gap-2 transition-all border border-rose-200 hover:border-rose-300 active:scale-95">
+                                <LogOut size={14} /> Sever Connection
+                            </button>
+                        </div>
                     </motion.div>
                 </div>
             </div>

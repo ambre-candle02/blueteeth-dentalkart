@@ -19,7 +19,7 @@ export function ToggleRoleButton({ userId, currentRole }: { userId: string, curr
             } else {
                 toast.error(result.error || "Failed to update role");
             }
-        } catch (err) {
+        } catch {
             toast.error("An unexpected error occurred");
         } finally {
             setIsPending(false);
@@ -30,18 +30,18 @@ export function ToggleRoleButton({ userId, currentRole }: { userId: string, curr
         <button
             onClick={handleToggle}
             disabled={isPending}
-            className={`p-2 rounded-xl transition-all ${currentRole === 'ADMIN'
-                    ? 'bg-purple-100 text-purple-600 hover:bg-purple-200'
-                    : 'bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600'
+            className={`relative p-2.5 rounded-xl transition-all shadow-md border backdrop-blur-md disabled:opacity-50 ${currentRole === 'ADMIN'
+                    ? 'bg-gradient-to-br from-amber-400/30 to-orange-400/20 text-amber-600 border-amber-300/50 hover:from-amber-400/50 hover:to-orange-400/40 hover:shadow-amber-200 shadow-amber-100/60'
+                    : 'bg-gradient-to-br from-cyan-400/25 to-teal-400/20 text-teal-600 border-teal-300/50 hover:from-cyan-400/45 hover:to-teal-400/35 hover:shadow-teal-100 shadow-teal-100/50'
                 }`}
-            title={currentRole === 'ADMIN' ? "Revoke Admin Access" : "Grant Admin Access"}
+            title={currentRole === 'ADMIN' ? "Revoke Admin — Make User" : "Grant Admin Access"}
         >
             {isPending ? (
-                <Loader2 size={18} className="animate-spin" />
+                <Loader2 size={16} className="animate-spin" />
             ) : currentRole === 'ADMIN' ? (
-                <ShieldAlert size={18} />
+                <ShieldAlert size={16} />
             ) : (
-                <ShieldCheck size={18} />
+                <ShieldCheck size={16} />
             )}
         </button>
     );

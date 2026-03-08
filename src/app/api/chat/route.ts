@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-        const prompt = `You are a highly advanced and helpful AI assistant for a premium B2B dental store called 'Blueteeth Dentalkart' based in India. 
+        const prompt = `You are a highly advanced and helpful AI assistant for a premium B2B dental store called 'Blueteeth Dental Store' based in India. 
         You help dentists and clinics find dental equipment, instruments, x-ray sensors, chairs, and consumables. 
         CRITICAL RULE: Always respond in the EXACT same language that the user used. If the user asks in English, reply strictly in English. If the user asks in Hindi, reply in Hindi. If the user asks in Hinglish, reply in Hinglish. Be professional, concise, and helpful.
         

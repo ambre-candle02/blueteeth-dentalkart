@@ -8,13 +8,18 @@ import { z } from 'zod';
 export async function submitClinicSetup(formData: any, setupDetails: any) {
     try {
         const session = await auth();
+
+        if (!session?.user) {
+            return { success: false, error: "Authentication Required. Please log in to authorize implementation." };
+        }
+
         const setupRef = db.collection('clinic_setup_requests');
 
         const newRequest = {
             ...formData,
             ...setupDetails,
-            userId: session?.user?.id || 'anonymous',
-            userEmail: session?.user?.email || 'N/A',
+            userId: session.user.id,
+            userEmail: session.user.email,
             status: 'new',
             createdAt: new Date().toISOString(),
         };
@@ -27,7 +32,7 @@ export async function submitClinicSetup(formData: any, setupDetails: any) {
         return { success: true, requestId: docRef.id };
     } catch (error: any) {
         console.error('Clinic Setup Submission Failed:', error);
-        return { success: false, error: error.message };
+        return { success: false, error: error.message || "Internal Server Error" };
     }
 }
 

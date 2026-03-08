@@ -47,14 +47,14 @@ export function CategoryGrid() {
                         return (
                             <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: idx * 0.05 }}
+                                transition={{ duration: 0.2, delay: idx * 0.01 }}
                             >
                                 <Link
                                     href={`/category/${cat.name.toLowerCase()}`}
-                                    className={`group relative flex flex-col items-center justify-center p-8 h-48 rounded-[2rem] border shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-500 ${style.bgDefault} ${style.bgHover} ${style.borderDefault} ${style.borderHover} hover:shadow-[0_15px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 block`}
+                                    className={`group relative flex flex-col items-center justify-center p-8 h-48 rounded-[2rem] border shadow-[0_4px_20px_rgb(0,0,0,0.03)] transition-all duration-300 active:scale-95 ${style.bgDefault} ${style.bgHover} ${style.borderDefault} ${style.borderHover} hover:shadow-[0_15px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 block`}
                                 >
                                     <div className={`w-14 h-14 rounded-full bg-white flex items-center justify-center ${style.color} group-hover:scale-110 transition-transform duration-500 shadow-sm group-hover:shadow-md`}>
                                         <Icon size={24} strokeWidth={1.5} />

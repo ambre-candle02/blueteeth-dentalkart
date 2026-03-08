@@ -44,7 +44,7 @@ function ContactContent() {
                 setIsSubmitted(true);
                 setFormData({ firstName: '', lastName: '', email: '', message: '' });
             } else {
-                alert("Transmission failed. Please check your clinical uplink.");
+                alert(result.error || "Transmission failed. Please check your clinical uplink.");
             }
         } catch (error) {
             console.error(error);
@@ -65,23 +65,34 @@ function ContactContent() {
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-primary/5 rounded-full -mr-48 -mt-48 blur-[100px]" />
 
             <div className="max-w-[1600px] w-full mx-auto px-6 sm:px-10 lg:px-14 relative z-10">
-                <div className="mb-6">
-                    <BackButton />
-                </div>
-                <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center mb-16"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-primary/5 text-brand-primary text-[10px] font-black uppercase tracking-widest mb-4 border border-brand-primary/10">
-                        <Sparkles size={12} />
-                        Clinical Support
+                <div className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden mb-8 md:mb-12">
+                    <div className="relative p-5 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/[0.03] to-transparent pointer-events-none" />
+
+                        <div className="flex items-center gap-4 md:gap-6 relative z-10 w-full md:w-auto">
+                            <BackButton className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl shrink-0" />
+                            <div className="min-w-0">
+                                <div className="flex flex-col-reverse md:flex-row md:items-center gap-1 md:gap-3 mb-1 md:mb-0">
+                                    <h1 className="text-xl md:text-3xl font-black text-slate-900 tracking-tighter truncate">Clinical <span className="text-brand-primary">Support</span></h1>
+                                    <div className="w-fit inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/5 text-brand-primary text-[8px] md:text-[10px] font-black uppercase tracking-widest border border-brand-primary/10">
+                                        <Sparkles size={12} className="hidden md:block" />
+                                        Support Terminal
+                                    </div>
+                                </div>
+                                <p className="text-[10px] md:text-sm text-slate-400 font-medium leading-tight">
+                                    How can we <span className="text-slate-900 font-extrabold">assist you?</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="hidden md:flex items-center gap-3 relative z-10">
+                            <div className="px-4 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-[10px] font-bold text-slate-500 flex items-center gap-2">
+                                <MessageSquare size={14} className="text-brand-primary" />
+                                Encrypted Channel
+                            </div>
+                        </div>
                     </div>
-                    <h1 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">How can we assist you?</h1>
-                    <p className="text-base text-slate-500 max-w-xl mx-auto font-medium leading-relaxed">
-                        Access direct clinical support lines or transmit an encrypted message.
-                    </p>
-                </motion.div>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 w-full">
                     {/* Compact Contact Info */}
@@ -114,18 +125,20 @@ function ContactContent() {
                         ].map((item, idx) => (
                             <motion.div
                                 key={idx}
-                                className="p-1 rounded-[1.5rem] bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all"
+                                className="p-0.5 md:p-1 rounded-[1.5rem] bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all"
                             >
-                                <div className="p-5 bg-white rounded-[1.25rem] border border-slate-50 flex items-center gap-5">
+                                <div className="p-4 md:p-5 bg-white rounded-[1.25rem] border border-slate-50 flex items-center gap-4 md:gap-5">
                                     <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-inner", item.color)}>
                                         <item.icon size={18} />
                                     </div>
-                                    <div className="flex-1">
-                                        <div className="flex justify-between items-start">
-                                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{item.title}</p>
-                                            <p className="text-[8px] font-black text-slate-300 uppercase">{item.sub}</p>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest truncate">{item.title}</p>
+                                            <p className="text-[8px] font-black text-slate-300 uppercase shrink-0">{item.sub}</p>
                                         </div>
-                                        <a href={item.href} className="text-slate-600 font-bold text-sm hover:text-brand-primary transition-colors block leading-tight mt-1">{item.value}</a>
+                                        <a href={item.href} className="text-slate-600 font-bold text-[13px] md:text-sm hover:text-brand-primary transition-colors block leading-snug mt-1 break-words">
+                                            {item.value}
+                                        </a>
                                     </div>
                                 </div>
                             </motion.div>
@@ -152,8 +165,8 @@ function ContactContent() {
 
                     {/* Compact Form */}
                     <div className="lg:col-span-8">
-                        <div className="p-1 rounded-[2rem] bg-slate-200/40 border border-slate-200 shadow-xl">
-                            <div className="bg-white rounded-[1.75rem] border border-slate-100 p-8 md:p-10 relative overflow-hidden">
+                        <div className="md:p-1 rounded-[2rem] md:bg-slate-200/40 md:border md:border-slate-200 shadow-xl overflow-hidden">
+                            <div className="bg-white rounded-[1.75rem] border border-slate-100 p-6 md:p-10 relative overflow-hidden">
                                 <AnimatePresence mode="wait">
                                     {!isSubmitted ? (
                                         <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -10 }}>

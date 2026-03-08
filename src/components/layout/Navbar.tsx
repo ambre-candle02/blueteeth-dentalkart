@@ -49,15 +49,15 @@ export function Navbar() {
                 : "bg-white border-b border-transparent"
         )}>
             {/* Main Navbar */}
-            <div className="max-w-[1600px] w-full mx-auto px-8 sm:px-12 lg:px-16 xl:px-20 h-20 flex items-center justify-between">
+            <div className="max-w-[1600px] w-full mx-auto px-2 sm:px-4 md:px-8 lg:px-16 xl:px-20 h-16 md:h-20 flex items-center justify-between gap-1 sm:gap-2 md:gap-4">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-white font-bold text-xl group-hover:bg-brand-accent transition-colors">
+                <Link href="/" className="flex items-center gap-1 sm:gap-2 group active:scale-95 transition-transform duration-200">
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-primary rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl group-hover:bg-brand-accent transition-colors shrink-0">
                         B
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-xl font-bold text-brand-dark leading-tight">Blueteeth</span>
-                        <span className="text-xs text-brand-primary font-medium tracking-wider">DENTALKART</span>
+                        <span className="text-base sm:text-lg md:text-xl font-bold text-brand-dark leading-tight">Blueteeth</span>
+                        <span className="hidden xs:block text-[10px] md:text-xs text-brand-primary font-medium tracking-wider uppercase">DENTAL STORE</span>
                     </div>
                 </Link>
 
@@ -72,17 +72,17 @@ export function Navbar() {
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full bg-transparent py-3.5 pl-12 pr-28 text-sm focus:outline-none text-slate-900 placeholder:text-slate-400 relative z-0"
                         />
-                        <button type="submit" className="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-primary text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-brand-dark transition-all shrink-0 shadow-sm z-10 flex items-center justify-center">
+                        <button type="submit" className="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-primary text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-brand-dark transition-all active:scale-95 shrink-0 shadow-sm z-10 flex items-center justify-center">
                             Search
                         </button>
                     </form>
                 </div>
 
                 {/* Icons Area */}
-                <div className="flex items-center space-x-2 md:space-x-3">
+                <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
                     {/* Wishlist Box */}
-                    <Link href="/wishlist" className="p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group relative">
-                        <div className="bg-white border border-slate-100 shadow-sm p-1.5 rounded-full group-hover:bg-brand-primary/5 transition-colors">
+                    <Link href="/wishlist" className="p-1 sm:p-1.5 md:p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white active:scale-90 group relative">
+                        <div className="bg-white border border-slate-100 shadow-sm p-1 sm:p-1.5 rounded-full group-hover:bg-brand-primary/5 transition-colors">
                             <Heart className="w-[18px] h-[18px] text-slate-600 group-hover:text-brand-primary/50 group-hover:fill-brand-primary/50 transition-all duration-300" />
                         </div>
                         {wishlistItems.length > 0 && (
@@ -91,8 +91,8 @@ export function Navbar() {
                     </Link>
 
                     {/* Cart Box */}
-                    <Link href="/cart" className="p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group relative">
-                        <div className="bg-white border border-slate-100 shadow-sm p-1.5 rounded-full group-hover:bg-brand-light transition-colors">
+                    <Link href="/cart" className="p-1 sm:p-1.5 md:p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white active:scale-90 group relative">
+                        <div className="bg-white border border-slate-100 shadow-sm p-1 sm:p-1.5 rounded-full group-hover:bg-brand-light transition-colors">
                             <ShoppingCart className="w-[18px] h-[18px] text-slate-600 group-hover:text-brand-primary transition-colors" />
                         </div>
                         {cartCount > 0 && (
@@ -104,7 +104,7 @@ export function Navbar() {
 
                     {/* Admin Panel Link - Only for Admins */}
                     {(session?.user as any)?.role === 'ADMIN' && (
-                        <Link href="/admin" className="flex items-center gap-2 p-1.5 pr-4 rounded-full transition-all border border-brand-primary/20 bg-brand-primary/5 shadow-sm hover:shadow-md hover:border-brand-primary/40 hover:bg-brand-primary/10 group">
+                        <Link href="/admin" className="hidden sm:flex items-center gap-2 p-1.5 md:pr-4 rounded-full transition-all border border-brand-primary/20 bg-brand-primary/5 shadow-sm hover:shadow-md hover:border-brand-primary/40 hover:bg-brand-primary/10 group">
                             <div className="bg-brand-primary text-white p-1.5 rounded-full shadow-sm">
                                 <LayoutDashboard className="w-[18px] h-[18px]" />
                             </div>
@@ -115,8 +115,8 @@ export function Navbar() {
                     )}
 
                     {/* Profile Box */}
-                    <Link href="/profile" className="flex items-center gap-2 p-1.5 pr-4 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group">
-                        <div className="bg-white border border-slate-100 shadow-sm p-1.5 rounded-full group-hover:bg-brand-light transition-colors">
+                    <Link href="/profile" className="flex items-center gap-2 p-1 sm:p-1.5 md:pr-4 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group">
+                        <div className="bg-white border border-slate-100 shadow-sm p-1 sm:p-1.5 rounded-full group-hover:bg-brand-light transition-colors">
                             <User className="w-[18px] h-[18px] text-slate-600 group-hover:text-brand-primary transition-colors" />
                         </div>
                         <span className="hidden md:block text-sm font-bold text-slate-700 group-hover:text-brand-primary transition-colors">
@@ -132,10 +132,10 @@ export function Navbar() {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden p-2.5 hover:bg-slate-50 rounded-full transition-colors"
+                        className="md:hidden p-1 sm:p-1.5 hover:bg-slate-50 rounded-full transition-colors ml-0 sm:ml-1"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
-                        {isMobileMenuOpen ? <X className="w-6 h-6 text-slate-600" /> : <Menu className="w-6 h-6 text-slate-600" />}
+                        {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" />}
                     </button>
                 </div>
             </div>
@@ -318,12 +318,17 @@ export function Navbar() {
 
                             <div className="space-y-1">
                                 {CATEGORIES.map((cat) => (
-                                    <div key={cat.name} className="py-2 border-b border-slate-50 dark:border-slate-800 last:border-0">
-                                        <div className="font-medium text-slate-800 dark:text-white flex justify-between items-center">
+                                    <Link
+                                        key={cat.name}
+                                        href={`/category/${cat.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                        className="py-3 border-b border-slate-50 dark:border-slate-800 last:border-0 block group/mob"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        <div className="font-medium text-slate-800 dark:text-white flex justify-between items-center group-hover/mob:text-brand-primary transition-colors">
                                             {cat.name}
-                                            <ChevronRight className="w-4 h-4 text-slate-400" />
+                                            <ChevronRight className="w-4 h-4 text-slate-400 group-hover/mob:translate-x-1 transition-transform" />
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
 

@@ -22,7 +22,7 @@ export default async function Home() {
   const newArrivals = [...allProducts].reverse().slice(0, 10);
 
   return (
-    <div className="flex flex-col gap-0 w-full overflow-hidden">
+    <div className="flex flex-col gap-0 w-full overflow-x-hidden">
       <Hero />
       <div className="w-full bg-[#FAFBFF]">
         <TrustStrip />

@@ -27,12 +27,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {/* Product Detail Zone */}
             <div className="bg-[#FAFBFF] pb-10 relative overflow-hidden border-b border-slate-100/60">
                 {/* Background Decor */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] -mr-48 -mt-48" />
+                <div className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-brand-primary/[0.03] rounded-full blur-[80px] md:blur-[100px] -mr-32 md:-mr-48 -mt-32 md:-mt-48" />
 
-                <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-10 py-6 relative z-10">
-                    <BackButton />
+                <div className="max-w-[1100px] mx-auto px-4 md:px-10 py-4 md:py-6 relative z-10">
+                    <div className="mb-4 md:mb-6 flex items-center">
+                        <BackButton className="w-10 h-10 rounded-xl md:w-12 md:h-12 bg-white border border-slate-100 shadow-sm" />
+                    </div>
 
-                    <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.03)] border-2 border-slate-100 overflow-hidden relative group/container">
+                    <div className="bg-white rounded-2xl md:rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.03)] border border-slate-100 md:border-2 overflow-hidden relative group/container">
                         <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-brand-primary/[0.005] pointer-events-none" />
 
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 relative z-10">
@@ -45,7 +47,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-slate-100 to-transparent self-stretch" />
 
                             {/* Product Info Area */}
-                            <div className="lg:col-span-5 p-5 md:p-10 bg-white overflow-hidden self-center">
+                            <div className="lg:col-span-5 p-6 md:p-10 bg-white overflow-hidden self-center">
                                 <ProductInfo product={product} />
                             </div>
                         </div>

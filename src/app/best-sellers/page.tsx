@@ -39,41 +39,41 @@ export default function BestSellersPage() {
     };
 
     return (
-        <div className="bg-[#FAFBFF] min-h-screen py-8">
-            <div className="max-w-[1500px] w-full mx-auto px-6 sm:px-10 lg:px-14">
+        <div className="bg-[#FAFBFF] min-h-screen py-4 md:py-8">
+            <div className="max-w-[1500px] w-full mx-auto px-4 sm:px-10 lg:px-14">
 
                 {/* Unified Premium Header (The "Patti") */}
-                <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden mb-10">
-                    <div className="relative p-7 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+                <div className="bg-white rounded-2xl md:rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden mb-6 md:mb-10">
+                    <div className="relative p-4 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 overflow-hidden">
                         {/* Background Decor */}
                         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/[0.02] to-transparent pointer-events-none" />
 
-                        <div className="flex items-center gap-6 relative z-10 w-full md:w-auto">
+                        <div className="flex items-center gap-3 md:gap-6 relative z-10 w-full md:w-auto">
                             {/* Dynamic Client-side Back Button */}
-                            <BackButton />
+                            <BackButton className="w-8 h-8 md:w-12 md:h-12" />
 
-                            <div className="flex-1">
-                                <div className="flex items-center gap-3 mb-1">
-                                    <h1 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Best Sellers</h1>
-                                    <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Top {bestSellers.length} Picks</span>
+                            <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 md:gap-3">
+                                    <h1 className="text-lg md:text-3xl font-bold text-slate-800 tracking-tight leading-none">Best Sellers</h1>
+                                    <span className="bg-slate-100 text-slate-500 text-[8px] md:text-[10px] font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-lg uppercase tracking-wider whitespace-nowrap shrink-0">Top {bestSellers.length} Picks</span>
                                 </div>
-                                <p className="text-sm text-slate-400 font-medium">Clinically preferred products by dentists across India.</p>
+                                <p className="text-[10px] md:text-sm text-slate-400 font-medium mt-0.5 line-clamp-1 md:line-clamp-none">Clinically preferred products by dentists across India.</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 w-full md:w-auto relative z-10">
+                        <div className="flex items-center gap-3 md:gap-4 w-full md:w-auto relative z-10 mt-1 md:mt-0">
                             <div className="relative group/sort flex-1 md:flex-initial">
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full appearance-none bg-brand-primary text-white px-8 py-3.5 pr-14 rounded-2xl text-[11px] font-bold uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-brand-primary/10 cursor-pointer hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/20"
+                                    className="w-full appearance-none bg-brand-primary text-white px-6 md:px-8 py-2 md:py-3.5 pr-10 md:pr-14 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-bold uppercase tracking-widest focus:outline-none focus:ring-4 focus:ring-brand-primary/10 cursor-pointer hover:bg-brand-dark transition-all shadow-md md:shadow-lg shadow-brand-primary/20"
                                 >
                                     <option value="popular">Sort: Popularity</option>
                                     <option value="price-low">Price: Low to High</option>
                                     <option value="price-high">Price: High to Low</option>
                                     <option value="rating">Highest Rated</option>
                                 </select>
-                                <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" size={16} />
+                                <ChevronDown className="absolute right-3.5 md:right-5 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" size={12} />
                             </div>
 
                             <div className="hidden xl:flex items-center gap-2 px-5 py-3 bg-emerald-600 rounded-2xl shadow-lg shadow-emerald-600/20 border border-emerald-500">

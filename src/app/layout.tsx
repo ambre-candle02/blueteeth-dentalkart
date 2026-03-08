@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Blueteeth Dentalkart",
+  title: "Blueteeth Dental Store",
   description: "Premium Dental E-commerce Marketplace",
 };
 
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.variable, "antialiased bg-slate-50")}>
+      <body className={cn(inter.variable, "antialiased bg-slate-50 overflow-x-hidden")}>
         <Providers>
           <ConditionalLayout>
             {children}

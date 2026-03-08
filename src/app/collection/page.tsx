@@ -37,7 +37,7 @@ export default function CollectionPage() {
                     <div>
                         <div className="flex items-center gap-3 mb-2">
                             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Product Collections</h1>
-                            <span className="bg-brand-primary/10 text-brand-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                            <span className="bg-brand-primary/10 text-brand-primary text-[10px] md:text-xs font-bold px-3 py-1 rounded-lg uppercase tracking-wider whitespace-nowrap">
                                 {CATEGORIES.length} Categories
                             </span>
                         </div>
@@ -125,7 +125,7 @@ export default function CollectionPage() {
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap lg:flex-nowrap items-center justify-center lg:justify-end gap-4 md:gap-6 relative z-10 w-full lg:w-auto">
+                    <div className="grid grid-cols-2 lg:flex lg:flex-nowrap items-center justify-center lg:justify-end gap-3 md:gap-6 relative z-10 w-full lg:w-auto">
                         {[
                             { name: "3M ESPE", color: "blue" },
                             { name: "Dentsply Sirona", color: "purple" },
@@ -141,7 +141,7 @@ export default function CollectionPage() {
                             return (
                                 <div
                                     key={brand.name}
-                                    className={`px-5 py-3 rounded-2xl border font-bold text-[13px] tracking-tight transition-all cursor-default whitespace-nowrap shadow-sm hover:shadow-md hover:-translate-y-0.5 ${tints[brand.color]}`}
+                                    className={`px-4 py-3 md:px-5 md:py-3 rounded-xl md:rounded-2xl border font-bold text-[11px] md:text-[13px] tracking-tight transition-all cursor-default whitespace-nowrap shadow-sm hover:shadow-md hover:-translate-y-0.5 text-center flex items-center justify-center ${tints[brand.color]}`}
                                 >
                                     {brand.name}
                                 </div>

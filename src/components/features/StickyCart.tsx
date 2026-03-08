@@ -34,12 +34,12 @@ export function StickyCart({ product }: { product: Product }) {
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 100, opacity: 0 }}
-                    className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-xl z-40 md:hidden"
+                    className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-5 pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.08)] z-40 md:hidden"
                 >
-                    <div className="flex items-center gap-4">
-                        <div className="flex-1">
-                            <p className="font-bold text-slate-900 truncate">{product.name}</p>
-                            <p className="text-brand-primary font-bold">₹{product.price.toLocaleString()}</p>
+                    <div className="flex items-center gap-4 max-w-md mx-auto">
+                        <div className="flex-1 min-w-0">
+                            <p className="font-bold text-slate-900 truncate text-sm">{product.name}</p>
+                            <p className="text-brand-primary font-black text-lg">₹{product.price.toLocaleString()}</p>
                         </div>
                         <button
                             onClick={() => {
@@ -47,9 +47,9 @@ export function StickyCart({ product }: { product: Product }) {
                                 addItem(product);
                                 toast.success(`Added ${product.name} to cart`);
                             }}
-                            className="bg-brand-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-brand-dark transition-colors flex items-center gap-2"
+                            className="bg-brand-primary text-white px-8 py-3.5 rounded-2xl font-black text-sm hover:bg-brand-dark transition-all shadow-lg shadow-brand-primary/20 flex items-center gap-2 active:scale-95"
                         >
-                            <ShoppingCart size={18} />
+                            <ShoppingCart size={16} />
                             Add
                         </button>
                     </div>

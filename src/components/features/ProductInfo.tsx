@@ -36,39 +36,39 @@ export function ProductInfo({ product }: { product: Product }) {
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-col h-full"
         >
-            <div className="flex justify-between items-start mb-4">
-                <div className="flex flex-wrap items-center gap-3">
-                    <span className="inline-flex items-center text-[11px] font-bold text-brand-primary bg-brand-primary/5 px-4 py-2 rounded-xl uppercase tracking-widest leading-none whitespace-nowrap border border-brand-primary/10 transition-colors hover:bg-brand-primary/10">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+                <div className="flex flex-wrap items-center gap-2 md:gap-3">
+                    <span className="inline-flex items-center text-[9px] md:text-[11px] font-bold text-brand-primary bg-brand-primary/5 px-3 md:px-4 py-1.5 md:py-2 rounded-xl uppercase tracking-widest leading-none whitespace-nowrap border border-brand-primary/10 transition-colors hover:bg-brand-primary/10">
                         {product.category}
                     </span>
                     {isAvailable && (
-                        <span className="inline-flex items-center text-[10px] font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full uppercase tracking-wider leading-none whitespace-nowrap border border-emerald-100/50">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 animate-pulse" />
+                        <span className="inline-flex items-center text-[9px] md:text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-wider leading-none whitespace-nowrap border border-emerald-100/50">
+                            <span className="w-1 md:w-1.5 h-1 md:h-1.5 rounded-full bg-emerald-500 mr-2 animate-pulse" />
                             In Stock
                         </span>
                     )}
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2 absolute md:relative top-0 right-0 md:top-auto md:right-auto">
                     <button
                         onClick={handleWishlist}
-                        className="p-2 rounded-full transition-all border border-brand-primary/10 bg-brand-primary/[0.03] shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group relative"
+                        className="p-1.5 md:p-2 rounded-full transition-all border border-brand-primary/10 bg-brand-primary/[0.03] shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group"
                     >
                         <div className={cn(
-                            "bg-brand-primary/[0.08] border border-brand-primary/10 shadow-sm p-1.5 rounded-full group-hover:bg-brand-primary/20 transition-colors flex items-center justify-center",
+                            "bg-brand-primary/[0.08] border border-brand-primary/10 shadow-sm p-1 md:p-1.5 rounded-full group-hover:bg-brand-primary/20 transition-colors flex items-center justify-center",
                             isInWish ? "text-red-500" : "text-brand-primary"
                         )}>
-                            <Heart fill={isInWish ? "currentColor" : "none"} size={16} className="transition-transform group-active:scale-90" />
+                            <Heart fill={isInWish ? "currentColor" : "none"} size={14} className="md:w-[16px] md:h-[16px] transition-transform group-active:scale-90" />
                         </div>
                     </button>
-                    <button className="p-2 rounded-full transition-all border border-brand-primary/10 bg-brand-primary/[0.03] shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group relative">
-                        <div className="bg-brand-primary/[0.08] border border-brand-primary/10 shadow-sm p-1.5 rounded-full group-hover:bg-brand-primary/20 transition-colors flex items-center justify-center text-brand-primary">
-                            <Share2 size={16} />
+                    <button className="p-1.5 md:p-2 rounded-full transition-all border border-brand-primary/10 bg-brand-primary/[0.03] shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group">
+                        <div className="bg-brand-primary/[0.08] border border-brand-primary/10 shadow-sm p-1 md:p-1.5 rounded-full group-hover:bg-brand-primary/20 transition-colors flex items-center justify-center text-brand-primary">
+                            <Share2 size={14} className="md:w-[16px] md:h-[16px]" />
                         </div>
                     </button>
                 </div>
             </div>
 
-            <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 leading-tight tracking-tight">
+            <h1 className="text-xl md:text-3xl font-black text-slate-900 mb-3 leading-tight tracking-tight mt-4 md:mt-0">
                 {product.name}
             </h1>
 
@@ -109,7 +109,7 @@ export function ProductInfo({ product }: { product: Product }) {
                 </p>
             </div>
 
-            <p className="text-base text-slate-600 leading-relaxed mb-8 font-medium italic border-l-4 border-brand-primary/30 pl-6 py-1 bg-slate-50/50 rounded-r-2xl">
+            <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-6 md:mb-8 font-medium italic border-l-4 border-brand-primary/30 pl-4 md:pl-6 py-1 bg-slate-50/50 rounded-r-2xl">
                 &quot;{product.description || "Crafted for precision, this elite professional series unit redefines clinical excellence."}&quot;
             </p>
 

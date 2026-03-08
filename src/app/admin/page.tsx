@@ -100,7 +100,7 @@ export default function AdminDashboard() {
     const totalRevenue = data.orders.reduce((sum: number, o: any) => sum + (o.totalAmount || 0), 0);
 
     return (
-        <div className="max-w-7xl mx-auto space-y-10">
+        <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-8 sm:space-y-10">
             {/* Header Area */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
@@ -110,36 +110,36 @@ export default function AdminDashboard() {
             </div>
 
             {/* Metrics Grid with Colors and Full Labels */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <StatBox
                     title="Revenue"
                     value={`₹${(totalRevenue / 100000).toFixed(2)}L`}
-                    icon={<DollarSign size={20} />}
+                    icon={<DollarSign size={18} className="sm:size-5" />}
                     color="blue"
                 />
                 <StatBox
                     title="Active Orders"
                     value={data.orders.length}
-                    icon={<ShoppingCart size={20} />}
+                    icon={<ShoppingCart size={18} className="sm:size-5" />}
                     color="emerald"
                 />
                 <StatBox
                     title="User Index"
                     value={data.usersCount}
-                    icon={<Users size={20} />}
+                    icon={<Users size={18} className="sm:size-5" />}
                     color="amber"
                 />
                 <StatBox
                     title="Asset Stock"
                     value={data.products.length}
-                    icon={<Package size={20} />}
+                    icon={<Package size={18} className="sm:size-5" />}
                     color="rose"
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* Sales Activity - Simple Clean Card */}
-                <div className="lg:col-span-2 bg-blue-50/20 backdrop-blur-md p-8 rounded-2xl border border-blue-200/50 shadow-sm overflow-hidden">
+                <div className="lg:col-span-2 bg-blue-50/20 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-blue-200/50 shadow-sm overflow-hidden">
                     <div className="flex items-center justify-between mb-8 pb-5 border-b border-blue-200/30">
                         <div className="flex flex-col">
                             <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1">Sales Velocity (12D)</h2>
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Management Column */}
-                <div className="bg-blue-100/40 backdrop-blur-md p-8 rounded-2xl border-2 border-blue-200/60 shadow-sm flex flex-col gap-6 transition-all">
+                <div className="bg-blue-100/40 backdrop-blur-md p-6 sm:p-8 rounded-2xl border-2 border-blue-200/60 shadow-sm flex flex-col gap-5 sm:gap-6 transition-all">
                     <div className="flex flex-col">
                         <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-800 mb-1">Management Core</h2>
                         <p className="text-[9px] font-bold text-blue-600/60 uppercase tracking-widest italic">Institutional Protocols</p>
@@ -211,13 +211,13 @@ function StatBox({ title, value, icon, color }: { title: string; value: string |
     };
 
     return (
-        <div className={`p-6 rounded-2xl border shadow-sm flex items-center gap-5 transition-all hover:scale-[1.02] active:scale-95 group relative overflow-hidden backdrop-blur-sm cursor-default ${bgMap[color]}`}>
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border shadow-md transition-all ${colorMap[color]}`}>
+        <div className={`p-4 sm:p-6 rounded-2xl border shadow-sm flex items-center gap-4 sm:gap-5 transition-all hover:scale-[1.02] active:scale-95 group relative overflow-hidden backdrop-blur-sm cursor-default ${bgMap[color]}`}>
+            <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center border shadow-md transition-all ${colorMap[color]}`}>
                 {icon}
             </div>
-            <div>
-                <p className="text-[10px] text-slate-500 uppercase tracking-widest font-black mb-1 opacity-70 italic">{title}</p>
-                <p className="text-2xl font-black text-slate-900 leading-none tabular-nums tracking-tighter">{value}</p>
+            <div className="min-w-0">
+                <p className="text-[8px] sm:text-[10px] text-slate-500 uppercase tracking-widest font-black mb-0.5 sm:mb-1 opacity-70 italic truncate">{title}</p>
+                <p className="text-xl sm:text-2xl font-black text-slate-900 leading-none tabular-nums tracking-tighter">{value}</p>
             </div>
         </div>
     );
