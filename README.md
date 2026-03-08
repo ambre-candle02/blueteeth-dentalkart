@@ -32,7 +32,7 @@ A visual identity that reflects clinical precision and professional governance.
 
 ## 🌐 Project Infrastructure
 *   **GitHub Repository:** [Blueteeth DENTAL STORE Repository](https://github.com/ambre-candle02/blueteeth-dentalkart)
-*   **Live Deployment:** [Blueteeth DENTAL STORE Live Site](https://blueteeth.store)
+*   **Live Deployment:** [Blueteeth DENTAL STORE Live Site](https://blueteeth-dental-cart.vercel.app)
 *   **Cloud Hosting:** Vercel (Production Edge)
 
 ---
