@@ -1,7 +1,7 @@
-# 🦷 Blueteeth Dental Store
+# 🦷 Blueteeth DENTAL STORE
 ### *The Next Era of Oral Care Procurement*
 
-Blueteeth Dental Store is a premium, high-performance B2B dental marketplace designed for elite clinical practitioners. Built with a focus on **Precision, Security, and Clinical Excellence**.
+Blueteeth DENTAL STORE is a premium, high-performance B2B dental marketplace designed for elite clinical practitioners. Built with a focus on **Precision, Security, and Clinical Excellence**.
 
 ---
 
@@ -51,4 +51,4 @@ A visual identity that reflects clinical precision and professional governance.
 3. **Admin Login:** Access via `/login` using master credentials.
 
 ---
-**© 2026 Blueteeth Dental Store | Delivering Clinical Excellence.**
+**© 2026 Blueteeth DENTAL STORE | Delivering Clinical Excellence.**
