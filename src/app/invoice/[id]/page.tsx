@@ -42,7 +42,7 @@ export default async function InvoicePage({ params }: { params: { id: string } }
                     <div>
                         <div className="w-14 h-14 bg-brand-primary rounded-2xl flex items-center justify-center font-black text-white text-3xl tracking-tighter mb-4 shadow-xl shadow-brand-primary/20">B</div>
                         <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-none mb-1">Blueteeth</h1>
-                        <p className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">Premium Dental Store</p>
+                        <p className="text-[10px] font-black tracking-[0.2em] text-brand-primary uppercase">DENTAL STORE</p>
                     </div>
                     <div className="text-left md:text-right w-full md:w-auto">
                         <h2 className="text-4xl md:text-5xl font-black text-slate-100 uppercase tracking-tighter leading-none">Invoice</h2>
@@ -75,7 +75,7 @@ export default async function InvoicePage({ params }: { params: { id: string } }
 
                     <div className="md:text-right space-y-1">
                         <p className="text-[9px] md:text-[10px] font-black tracking-widest text-slate-400 uppercase mb-2 md:mb-3">Issued By</p>
-                        <h3 className="text-base md:text-lg font-black text-slate-900 leading-tight">Blueteeth Corp.</h3>
+                        <h3 className="text-base md:text-lg font-black text-slate-900 leading-tight">Blueteeth DENTAL STORE</h3>
                         <p className="text-[13px] md:text-sm font-medium text-slate-500">Chirag Delhi Metro Stn, Masjid Moth</p>
                         <p className="text-[13px] md:text-sm font-medium text-slate-500">New Delhi, ND-110017, India</p>
                         <p className="text-[13px] md:text-sm font-medium text-brand-primary pt-1">finance@blueteeth.store</p>

@@ -57,7 +57,7 @@ export function Navbar() {
                     </div>
                     <div className="flex flex-col">
                         <span className="text-base sm:text-lg md:text-xl font-bold text-brand-dark leading-tight">Blueteeth</span>
-                        <span className="hidden xs:block text-[10px] md:text-xs text-brand-primary font-medium tracking-wider uppercase">DENTAL STORE</span>
+                        <span className="block text-[8px] md:text-xs text-brand-primary font-bold tracking-wider uppercase">DENTAL STORE</span>
                     </div>
                 </Link>
 

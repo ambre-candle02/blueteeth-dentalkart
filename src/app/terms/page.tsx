@@ -111,7 +111,7 @@ export default function TermsPage() {
                         <div className="max-w-2xl space-y-3 md:space-y-4 text-left">
                             <h2 className="text-lg md:text-3xl font-black text-white leading-tight">Professional Governance Protocols.</h2>
                             <p className="text-slate-400 font-medium text-[13px] md:text-lg leading-relaxed">
-                                This document outlines the protocols and legal boundaries of the Blueteeth Dental Store ecosystem for clinical professionals.
+                                This document outlines the protocols and legal boundaries of the Blueteeth DENTAL STORE ecosystem for clinical professionals.
                             </p>
 
                             <div className="flex flex-wrap gap-x-5 gap-y-2 pt-4 border-t border-white/5">

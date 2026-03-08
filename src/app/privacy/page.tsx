@@ -90,7 +90,7 @@ export default function PrivacyPage() {
                         <div className="max-w-3xl text-left space-y-4">
                             <h2 className="text-lg md:text-2xl font-black text-slate-900 leading-tight">Global Standards, Precision.</h2>
                             <p className="text-slate-500 font-medium text-[13px] md:text-lg leading-relaxed">
-                                At Blueteeth Dental Store, your data is as sensitive as your clinical procedures. Built on transparency and trust.
+                                At Blueteeth DENTAL STORE, your data is as sensitive as your clinical procedures. Built on transparency and trust.
                             </p>
 
                             <div className="flex flex-wrap gap-3">

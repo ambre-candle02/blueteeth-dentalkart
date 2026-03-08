@@ -109,7 +109,7 @@ export default function ShippingPage() {
                             <div className="space-y-2 text-left">
                                 <h2 className="text-lg md:text-2xl font-black text-slate-800 leading-tight">Delivering Clinical Excellence.</h2>
                                 <p className="text-slate-500 font-medium text-[13px] md:text-base leading-relaxed max-w-xl">
-                                    Blueteeth Dental Store operates one of the most sophisticated healthcare supply chains in the nation.
+                                    Blueteeth DENTAL STORE operates one of the most sophisticated healthcare supply chains in the nation.
                                 </p>
                             </div>
                         </div>

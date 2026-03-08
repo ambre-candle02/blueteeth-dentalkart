@@ -26,7 +26,7 @@ export default function AboutPage() {
                             <BackButton className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl shrink-0" />
                             <div>
                                 <div className="flex items-center gap-3 mb-0.5">
-                                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter">About <span className="text-brand-primary">Blueteeth</span></h1>
+                                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter">About <span className="text-brand-primary">Blueteeth DENTAL STORE</span></h1>
                                     <Sparkles size={20} className="text-brand-primary animate-pulse hidden md:block" />
                                 </div>
                                 <p className="text-[9px] md:text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">The Future of Dental Procurement</p>

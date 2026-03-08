@@ -41,7 +41,10 @@ export function Footer() {
                                 <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md">
                                     B
                                 </div>
-                                <span className="text-2xl font-black text-brand-dark tracking-tight">Blueteeth</span>
+                                <div className="flex flex-col">
+                                    <span className="text-2xl font-black text-brand-dark tracking-tight leading-none">Blueteeth</span>
+                                    <span className="text-[10px] text-brand-primary font-bold tracking-[0.2em] uppercase mt-1">DENTAL STORE</span>
+                                </div>
                             </div>
                             <p className="text-[13px] md:text-[14px] leading-relaxed mb-8 text-slate-600 font-medium pe-4">
                                 India&apos;s most trusted B2B dental marketplace. Premium equipment, instruments, and consumables for clinical excellence.
