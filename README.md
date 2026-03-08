@@ -31,8 +31,8 @@ A visual identity that reflects clinical precision and professional governance.
 - **🛂 Compliance Shield:** Secured user management and password resets.
 
 ## 🌐 Project Infrastructure
-*   **GitHub Repository:** [https://github.com/ambre-candle02/blueteeth-dentalkart](https://github.com/ambre-candle02/blueteeth-dentalkart)
-*   **Live Deployment:** [https://blueteeth-dental-cart.vercel.app](https://blueteeth-dental-cart.vercel.app)
+*   **GitHub Repository:** [Blueteeth DENTAL STORE Repository](https://github.com/ambre-candle02/blueteeth-dentalkart)
+*   **Live Deployment:** [Blueteeth DENTAL STORE Live Site](https://blueteeth-dental-cart.vercel.app)
 *   **Cloud Hosting:** Vercel (Production Edge)
 
 ---
