@@ -41,17 +41,38 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Effect to prevent body scroll without layout shift
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            // Get scrollbar width to prevent layout shift
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            document.body.style.overflow = "hidden";
+            // Check if Windows - only apply padding if scrollbar takes up space
+            if (scrollbarWidth > 0 && navigator.platform.toLowerCase().includes('win')) {
+                document.body.style.paddingRight = `${scrollbarWidth}px`;
+            }
+        } else {
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+        }
+        
+        return () => {
+            document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
+        };
+    }, [isMobileMenuOpen]);
+
     return (
         <header className={cn(
-            "sticky top-0 z-50 will-change-transform",
-            isScrolled
+            "sticky top-0 z-50 will-change-transform transition-all",
+            isScrolled || isMobileMenuOpen
                 ? "bg-white/95 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)]"
                 : "bg-white border-b border-transparent"
         )}>
             {/* Main Navbar */}
-            <div className="max-w-[1600px] w-full mx-auto px-2 sm:px-4 md:px-8 lg:px-16 xl:px-20 h-16 md:h-20 flex items-center justify-between gap-1 sm:gap-2 md:gap-4">
+            <div className="max-w-[1600px] w-full mx-auto px-2 sm:px-4 md:px-8 lg:px-16 xl:px-20 h-16 md:h-20 flex items-center justify-between gap-1 sm:gap-2 md:gap-4 relative bg-transparent z-20">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-1 sm:gap-2 group active:scale-95 transition-transform duration-200">
+                <Link href="/" className="flex items-center gap-1 sm:gap-2 group active:scale-95 transition-transform duration-200" onClick={() => setIsMobileMenuOpen(false)}>
                     <div className="w-8 h-8 md:w-10 md:h-10 bg-brand-primary rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-lg md:text-xl group-hover:bg-brand-accent transition-colors shrink-0">
                         B
                     </div>
@@ -79,11 +100,11 @@ export function Navbar() {
                 </div>
 
                 {/* Icons Area */}
-                <div className="flex items-center gap-1 sm:gap-2 md:gap-3 shrink-0">
+                <div className="flex items-center gap-2 sm:gap-3 md:gap-4 shrink-0">
                     {/* Wishlist Box */}
-                    <Link href="/wishlist" className="p-1 sm:p-1.5 md:p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white active:scale-90 group relative">
-                        <div className="bg-white border border-slate-100 shadow-sm p-1 sm:p-1.5 rounded-full group-hover:bg-brand-primary/5 transition-colors">
-                            <Heart className="w-[18px] h-[18px] text-slate-600 group-hover:text-brand-primary/50 group-hover:fill-brand-primary/50 transition-all duration-300" />
+                    <Link href="/wishlist" className="p-1.5 sm:p-2 md:p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white active:scale-90 group relative" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className="bg-white border border-slate-100 shadow-sm p-1.5 sm:p-2 rounded-full group-hover:bg-brand-primary/5 transition-colors">
+                            <Heart className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-slate-600 group-hover:text-brand-primary/50 group-hover:fill-brand-primary/50 transition-all duration-300" />
                         </div>
                         {wishlistItems.length > 0 && (
                             <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white shadow-sm z-10"></span>
@@ -91,12 +112,12 @@ export function Navbar() {
                     </Link>
 
                     {/* Cart Box */}
-                    <Link href="/cart" className="p-1 sm:p-1.5 md:p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white active:scale-90 group relative">
-                        <div className="bg-white border border-slate-100 shadow-sm p-1 sm:p-1.5 rounded-full group-hover:bg-brand-light transition-colors">
-                            <ShoppingCart className="w-[18px] h-[18px] text-slate-600 group-hover:text-brand-primary transition-colors" />
+                    <Link href="/cart" className="p-1.5 sm:p-2 md:p-2.5 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white active:scale-90 group relative" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className="bg-white border border-slate-100 shadow-sm p-1.5 sm:p-2 rounded-full group-hover:bg-brand-light transition-colors">
+                            <ShoppingCart className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-slate-600 group-hover:text-brand-primary transition-colors" />
                         </div>
                         {cartCount > 0 && (
-                            <span className="absolute top-1.5 right-1.5 w-4.5 h-4.5 bg-brand-primary text-white text-[10px] flex items-center justify-center rounded-full font-bold px-1.5 border border-white shadow-sm z-10 -mr-2 -mt-2">
+                            <span className="absolute top-1 right-1 w-4.5 h-4.5 bg-brand-primary text-white text-[10px] flex items-center justify-center rounded-full font-bold px-1.5 border border-white shadow-sm z-10">
                                 {cartCount}
                             </span>
                         )}
@@ -115,9 +136,9 @@ export function Navbar() {
                     )}
 
                     {/* Profile Box */}
-                    <Link href="/profile" className="flex items-center gap-2 p-1 sm:p-1.5 md:pr-4 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group">
-                        <div className="bg-white border border-slate-100 shadow-sm p-1 sm:p-1.5 rounded-full group-hover:bg-brand-light transition-colors">
-                            <User className="w-[18px] h-[18px] text-slate-600 group-hover:text-brand-primary transition-colors" />
+                    <Link href="/profile" className="flex items-center gap-2 p-1.5 sm:p-2 md:pr-4 rounded-full transition-all border border-slate-200/80 bg-slate-50/50 shadow-sm hover:shadow-md hover:border-brand-primary/30 hover:bg-white group" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className="bg-white border border-slate-100 shadow-sm p-1.5 sm:p-2 rounded-full group-hover:bg-brand-light transition-colors">
+                            <User className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-slate-600 group-hover:text-brand-primary transition-colors" />
                         </div>
                         <span className="hidden md:block text-sm font-bold text-slate-700 group-hover:text-brand-primary transition-colors">
                             {status === 'loading' ? (
@@ -132,16 +153,16 @@ export function Navbar() {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden p-1 sm:p-1.5 hover:bg-slate-50 rounded-full transition-colors ml-0 sm:ml-1"
+                        className="md:hidden p-1.5 hover:bg-slate-50 rounded-full transition-colors ml-1 focus:outline-none"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
-                        {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" />}
+                        {isMobileMenuOpen ? <X className="w-6 h-6 text-slate-600" /> : <Menu className="w-6 h-6 text-slate-600" />}
                     </button>
                 </div>
             </div>
 
-            {/* Secondary Navigation Bar */}
-            <nav className="hidden md:block py-3 border-t border-slate-200 border-b border-slate-200 bg-white relative z-10">
+            {/* Secondary Navigation Bar (Desktop) */}
+            <nav className="hidden md:block py-3 border-t border-slate-200 border-b border-slate-200 bg-white relative z-10 w-full">
                 <div className="max-w-[1600px] w-full mx-auto px-8 sm:px-12 lg:px-16 xl:px-20 flex items-center justify-between gap-4">
                     {/* Mega Menu Trigger */}
                     <div
@@ -292,16 +313,17 @@ export function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu - Mounted directly inside the sticky header */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="md:hidden bg-white border-t border-slate-100 dark:bg-slate-900 dark:border-slate-800 overflow-hidden"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "calc(100vh - 64px)" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                        className="md:hidden absolute top-full left-0 right-0 w-full z-40 bg-white border-t border-slate-100 overflow-y-auto shadow-2xl overscroll-contain"
                     >
-                        <div className="p-4 space-y-4">
+                        <div className="p-4 space-y-4 pb-12">
                             {/* Mobile Search */}
                             <form onSubmit={handleSearch} className="relative">
                                 <input
@@ -309,7 +331,7 @@ export function Navbar() {
                                     placeholder="Search products..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full bg-slate-50 border border-brand-primary/50 hover:border-brand-primary dark:border-brand-primary/50 rounded-lg py-3 pl-10 pr-4 text-sm focus:outline-none focus:border-brand-primary transition-all dark:bg-slate-800"
+                                    className="w-full bg-slate-50 border border-brand-primary/20 hover:border-brand-primary/50 rounded-lg py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary/20 transition-all text-slate-900"
                                 />
                                 <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
                                     <Search className="w-5 h-5" />
@@ -321,10 +343,10 @@ export function Navbar() {
                                     <Link
                                         key={cat.name}
                                         href={`/category/${cat.name.toLowerCase().replace(/\s+/g, '-')}`}
-                                        className="py-3 border-b border-slate-50 dark:border-slate-800 last:border-0 block group/mob"
+                                        className="py-3 border-b border-slate-50 last:border-0 block group/mob"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
-                                        <div className="font-medium text-slate-800 dark:text-white flex justify-between items-center group-hover/mob:text-brand-primary transition-colors">
+                                        <div className="font-medium text-slate-800 flex justify-between items-center group-hover/mob:text-brand-primary transition-colors">
                                             {cat.name}
                                             <ChevronRight className="w-4 h-4 text-slate-400 group-hover/mob:translate-x-1 transition-transform" />
                                         </div>
@@ -333,13 +355,13 @@ export function Navbar() {
                             </div>
 
                             <div className="pt-2 flex flex-col gap-2">
-                                {NAV_LINKS.map(link => (
+                                {NAV_LINKS.filter(navLink => !CATEGORIES.some(cat => cat.name === navLink.name)).map(link => (
                                     <Link
                                         key={link.name}
                                         href={link.href}
                                         className={cn(
                                             "py-2 px-3 rounded-lg text-sm font-medium",
-                                            link.special ? "bg-brand-primary text-white text-center" : "text-slate-600 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
+                                            link.special ? "bg-brand-primary text-white text-center" : "text-slate-600 hover:bg-slate-50"
                                         )}
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
@@ -351,6 +373,6 @@ export function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </header >
+        </header>
     );
 }

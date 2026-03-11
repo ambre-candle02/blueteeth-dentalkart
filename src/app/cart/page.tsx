@@ -58,7 +58,7 @@ export default function CartPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#FAFBFF] pb-24 relative">
+        <div className="min-h-screen bg-[#FAFBFF] pb-40 lg:pb-24 relative">
             {/* Background Decor - fixed so they don't affect sticky */}
             <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-brand-primary/[0.03] rounded-full blur-[100px] -mr-64 -mt-64 pointer-events-none" />
             <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-emerald-500/[0.03] rounded-full blur-[100px] -ml-48 -mb-48 pointer-events-none" />

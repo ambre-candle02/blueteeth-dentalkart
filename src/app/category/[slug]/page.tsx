@@ -138,7 +138,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
                 <div className="flex flex-col lg:flex-row gap-10">
                     {/* Sidebar - Integrated and Clean */}
-                    <aside className="w-full lg:w-60 flex-shrink-0">
+                    <aside className="w-full lg:w-60 flex-shrink-0 mb-6 lg:mb-0">
                         <div className="sticky top-24 space-y-6">
                             <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
                                 <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-300 mb-6 flex items-center gap-2">

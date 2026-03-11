@@ -57,7 +57,7 @@ export function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-[1.12] tracking-tight max-w-5xl drop-shadow-lg"
+                    className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extrabold text-white mb-4 sm:mb-6 leading-[1.12] tracking-tight max-w-5xl drop-shadow-lg"
                 >
                     Premium Dental Tech. <br className="hidden md:block" />
                     <span className="text-blue-400 drop-shadow-md relative inline-block">
